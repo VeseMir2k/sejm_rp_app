@@ -1,16 +1,45 @@
-import * as React from "react"
-import Stack from "@mui/material/Stack"
-import Button from "@mui/material/Button"
+"use client"
+import { useEffect } from "react"
+import { observer } from "mobx-react-lite"
+import { MPsStore } from "./stores/MPsStore"
+import { Card, CardContent, Typography, Grid2 } from "@mui/material"
+import Image from "next/image"
 
-export default function Home() {
+const mpsStore = new MPsStore()
+
+const Home = observer(() => {
+  useEffect(() => {
+    mpsStore.fetchData()
+  }, [])
+
+  if (mpsStore.isLoading) {
+    return <p>Ładowanie danych...</p>
+  }
+
   return (
-    <Stack
-      spacing={2}
-      direction="row"
+    <Grid2
+      container
+      spacing={4}
     >
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-    </Stack>
+      {mpsStore.data.map((mp) => (
+        <Grid2
+          key={mp.id}
+          size={2}
+        >
+          <Card>
+            <Image
+              src={`https://api.sejm.gov.pl/sejm/term10/MP/${mp.id}/photo`}
+              alt={`Zdjęcie ${mp.firstLastName}`}
+              loading="lazy"
+              width={60}
+              height={75}
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
+            />
+          </Card>
+        </Grid2>
+      ))}
+    </Grid2>
   )
-}
+})
+
+export default Home

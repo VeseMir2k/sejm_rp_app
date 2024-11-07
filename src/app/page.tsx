@@ -2,7 +2,7 @@
 import { useEffect } from "react"
 import { observer } from "mobx-react-lite"
 import { MPsStore } from "./stores/MPsStore"
-import { Card, CardContent, Typography, Grid2 } from "@mui/material"
+import { Card, Grid2 } from "@mui/material"
 import Image from "next/image"
 
 const mpsStore = new MPsStore()

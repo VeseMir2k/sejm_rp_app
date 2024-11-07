@@ -1,13 +1,11 @@
 import Divider from "@mui/material/Divider"
 import Drawer from "@mui/material/Drawer"
-import InboxIcon from "@mui/icons-material/MoveToInbox"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemButton from "@mui/material/ListItemButton"
-import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
-import MailIcon from "@mui/icons-material/Mail"
 import Toolbar from "@mui/material/Toolbar"
+import Link from "next/link"
 
 type DrawerComponentProps = {
   window?: () => Window
@@ -36,23 +34,32 @@ export default function DrawerComponent({
   const container =
     window !== undefined ? () => window().document.body : undefined
 
+  const menu = [
+    { name: "Strona główna", href: "/" },
+    { name: "Kluby i koła", href: "/clubs-and-groups" },
+    { name: "Posłowie", href: "/members-of-parliament" },
+    { name: "Komisje", href: "/committees" },
+    { name: "Terminarz", href: "/timetable" },
+  ]
+
   const drawer = (
     <>
       <Toolbar />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem
-            key={text}
-            disablePadding
+        {menu.map((item) => (
+          <Link
+            style={{ color: "white", textDecorationLine: "none" }}
+            key={item.name}
+            href={item.href}
+            passHref
           >
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </>

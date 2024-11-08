@@ -5,13 +5,9 @@ import { useMPs } from "../stores/MPsStore"
 import MPCardComponent from "../components/MPCardComponent"
 import { useEffect, useState } from "react"
 import PaginationComponent from "../components/PaginationComponent"
+import { MP } from "../types"
 
-type MP = {
-  id: string
-  firstLastName: string
-}
-
-const itemsPerPage = 54
+const itemsPerPage = 18
 
 export default function MembersOfParliament() {
   const { MPsFetchData, data, isLoading } = useMPs()
@@ -31,7 +27,7 @@ export default function MembersOfParliament() {
         {currentData.map((item) => (
           <Grid2
             key={item.id}
-            size={2}
+            size={{ xs: 6, sm: 6, md: 3, lg: 2 }}
           >
             <MPCardComponent item={item} />
           </Grid2>

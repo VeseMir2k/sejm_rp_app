@@ -1,15 +1,7 @@
 import { Typography } from "@mui/material"
 import Link from "next/link"
 import Image from "next/image"
-
-type MP = {
-  id: string
-  firstLastName: string
-}
-
-type MPCardComponentProps = {
-  item: MP
-}
+import { MPCardComponentProps } from "../types"
 
 export default function MPCardComponent({ item }: MPCardComponentProps) {
   return (
@@ -23,9 +15,24 @@ export default function MPCardComponent({ item }: MPCardComponentProps) {
           height={75}
           style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
+
         <Typography
-          sx={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
-          variant="body1"
+          sx={{
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            background: "rgba(0,0,0,.5)",
+            color: "white",
+            padding: "10px",
+            transition: "background 0.3s ease",
+            "&:hover": {
+              background: "rgba(0, 0, 0, 0.7)",
+              color: "lightgrey",
+            },
+          }}
+          variant="body2"
         >
           {item.firstLastName}
         </Typography>

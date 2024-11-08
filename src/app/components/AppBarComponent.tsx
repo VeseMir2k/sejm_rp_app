@@ -3,13 +3,7 @@ import IconButton from "@mui/material/IconButton"
 import Typography from "@mui/material/Typography"
 import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
-
-type AppBarComponentProps = {
-  isClosing: boolean
-  setMobileOpen: (mobileOpen: boolean) => void
-  mobileOpen: boolean
-  drawerWidth: number
-}
+import { AppBarComponentProps } from "../types"
 
 export default function AppBarComponent({
   isClosing,

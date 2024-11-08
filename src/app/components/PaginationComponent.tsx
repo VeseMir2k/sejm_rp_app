@@ -1,14 +1,10 @@
 "use client"
+
 import { useEffect, useState } from "react"
 import { Stack, Pagination, PaginationItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-
-type PaginationComponentProps = {
-  data: any[]
-  itemsPerPage: number
-  setCurrentData: (data: any[]) => void
-}
+import { PaginationComponentProps } from "../types"
 
 export default function PaginationComponent({
   data,

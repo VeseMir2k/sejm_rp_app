@@ -1,15 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react"
-
-type MP = {
-  id: string
-  firstLastName: string
-}
-
-type MPsContextType = {
-  data: MP[]
-  isLoading: boolean
-  MPsFetchData: () => void
-}
+import { MPsContextType, MP } from "../types"
 
 const MPsContext = createContext<MPsContextType | undefined>(undefined)
 

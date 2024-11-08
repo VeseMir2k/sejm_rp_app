@@ -8,6 +8,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { useState } from "react"
 import AppBarComponent from "./components/AppBarComponent"
 import DrawerComponent from "./components/DrawerComponent"
+import MPsProvider from "./stores/MPsStore"
 
 const darkTheme = createTheme({
   palette: {
@@ -28,40 +29,42 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={darkTheme}>
-          <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBarComponent
-              drawerWidth={drawerWidth}
-              isClosing={isClosing}
-              setMobileOpen={setMobileOpen}
-              mobileOpen={mobileOpen}
-            />
-            <Box
-              component="nav"
-              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-              aria-label="mailbox folders"
-            >
-              <DrawerComponent
-                setIsClosing={setIsClosing}
+        <MPsProvider>
+          <ThemeProvider theme={darkTheme}>
+            <Box sx={{ display: "flex" }}>
+              <CssBaseline />
+              <AppBarComponent
+                drawerWidth={drawerWidth}
+                isClosing={isClosing}
                 setMobileOpen={setMobileOpen}
                 mobileOpen={mobileOpen}
-                drawerWidth={drawerWidth}
               />
+              <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                aria-label="mailbox folders"
+              >
+                <DrawerComponent
+                  setIsClosing={setIsClosing}
+                  setMobileOpen={setMobileOpen}
+                  mobileOpen={mobileOpen}
+                  drawerWidth={drawerWidth}
+                />
+              </Box>
+              <Box
+                component="main"
+                sx={{
+                  flexGrow: 1,
+                  p: 3,
+                  width: { sm: `calc(100% - ${drawerWidth}px)` },
+                }}
+              >
+                <Toolbar />
+                {children}
+              </Box>
             </Box>
-            <Box
-              component="main"
-              sx={{
-                flexGrow: 1,
-                p: 3,
-                width: { sm: `calc(100% - ${drawerWidth}px)` },
-              }}
-            >
-              <Toolbar />
-              {children}
-            </Box>
-          </Box>
-        </ThemeProvider>
+          </ThemeProvider>
+        </MPsProvider>
       </body>
     </html>
   )

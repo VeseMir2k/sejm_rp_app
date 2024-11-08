@@ -17,7 +17,7 @@ export default function MembersOfParliament() {
 
   useEffect(() => {
     MPsFetchData()
-    setTitle("Members of parliament")
+    setTitle("Posłowie")
   }, [MPsFetchData])
 
   if (isLoading) return <p>Ładowanie...</p>

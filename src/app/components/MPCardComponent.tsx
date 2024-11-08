@@ -2,11 +2,16 @@ import { Typography } from "@mui/material"
 import Link from "next/link"
 import Image from "next/image"
 
-// type MPCardComponentProps = {
+type MP = {
+  id: string
+  firstLastName: string
+}
 
-// }
+type MPCardComponentProps = {
+  item: MP
+}
 
-export default function MPCardComponent({ item }) {
+export default function MPCardComponent({ item }: MPCardComponentProps) {
   return (
     <Link href="/">
       <div style={{ position: "relative" }}>

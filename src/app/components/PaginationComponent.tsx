@@ -30,8 +30,13 @@ export default function PaginationComponent({
 
   return (
     <Stack
-      spacing={2}
       mt={2}
+      direction="row"
+      spacing={2}
+      sx={{
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
       <Pagination
         count={totalPages}

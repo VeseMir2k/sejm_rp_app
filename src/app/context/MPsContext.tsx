@@ -1,13 +1,19 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { MPsContextType, MP } from "../types"
+import { MP } from "../types"
+
+export type MPsContextType = {
+  data: MP[]
+  isLoading: boolean
+  MPsFetchData: () => void
+}
 
 const MPsContext = createContext<MPsContextType | undefined>(undefined)
 
-export default function MPsProvider({
-  children,
-}: {
+type MPsProps = {
   children: React.ReactNode
-}) {
+}
+
+export default function MPsProvider({ children }: MPsProps) {
   const [data, setData] = useState<MP[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -34,7 +40,7 @@ export default function MPsProvider({
   )
 }
 
-export const useMPs = (): MPsContextType => {
+export function useMPs() {
   const context = useContext(MPsContext)
   if (!context) {
     throw new Error("useMPs must be used within a MPsProvider")

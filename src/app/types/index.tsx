@@ -26,9 +26,3 @@ export type DrawerComponentProps = {
   mobileOpen: boolean
   drawerWidth: number
 }
-
-export type MPsContextType = {
-  data: MP[]
-  isLoading: boolean
-  MPsFetchData: () => void
-}

@@ -1,7 +1,8 @@
 "use client"
 
 import { Grid2, Container } from "@mui/material"
-import { useMPs } from "../stores/MPsStore"
+import { useMPs } from "../context/MPsContext"
+import { useAppBar } from "../context/AppBarContext"
 import MPCardComponent from "../components/MPCardComponent"
 import { useEffect, useState } from "react"
 import PaginationComponent from "../components/PaginationComponent"
@@ -11,10 +12,12 @@ const itemsPerPage = 18
 
 export default function MembersOfParliament() {
   const { MPsFetchData, data, isLoading } = useMPs()
+  const { setTitle } = useAppBar()
   const [currentData, setCurrentData] = useState<MP[]>([])
 
   useEffect(() => {
     MPsFetchData()
+    setTitle("Members of parliament")
   }, [MPsFetchData])
 
   if (isLoading) return <p>Ładowanie...</p>

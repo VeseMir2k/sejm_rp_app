@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography"
 import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
 import { AppBarComponentProps } from "../types"
+import { useAppBar } from "../context/AppBarContext"
 
 export default function AppBarComponent({
   isClosing,
@@ -11,6 +12,8 @@ export default function AppBarComponent({
   mobileOpen,
   drawerWidth,
 }: AppBarComponentProps) {
+  const { title } = useAppBar()
+
   const handleDrawerToggle = () => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen)
@@ -39,7 +42,7 @@ export default function AppBarComponent({
           noWrap
           component="div"
         >
-          Responsive drawer
+          {title}
         </Typography>
       </Toolbar>
     </AppBar>

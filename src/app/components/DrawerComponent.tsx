@@ -1,3 +1,5 @@
+"use client"
+
 import Divider from "@mui/material/Divider"
 import Drawer from "@mui/material/Drawer"
 import List from "@mui/material/List"
@@ -6,6 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton"
 import ListItemText from "@mui/material/ListItemText"
 import Toolbar from "@mui/material/Toolbar"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 type DrawerComponentProps = {
   window?: () => Window
@@ -22,6 +25,8 @@ export default function DrawerComponent({
   mobileOpen,
   drawerWidth,
 }: DrawerComponentProps) {
+  const pathname = usePathname()
+
   const handleDrawerClose = () => {
     setIsClosing(true)
     setMobileOpen(false)
@@ -47,20 +52,32 @@ export default function DrawerComponent({
       <Toolbar />
       <Divider />
       <List>
-        {menu.map((item) => (
-          <Link
-            style={{ color: "white", textDecorationLine: "none" }}
-            key={item.name}
-            href={item.href}
-            passHref
-          >
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
+        {menu.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link
+              style={{ color: "white", textDecoration: "none" }}
+              key={item.name}
+              href={item.href}
+              passHref
+            >
+              <ListItem disablePadding>
+                <ListItemButton
+                  sx={{
+                    backgroundColor: isActive
+                      ? "rgba(255, 255, 255, 0.2)"
+                      : "inherit",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
+                  }}
+                >
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )
+        })}
       </List>
     </>
   )

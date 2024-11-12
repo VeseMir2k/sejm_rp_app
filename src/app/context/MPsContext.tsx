@@ -2,8 +2,8 @@ import { createContext, useContext, useState, useCallback } from "react"
 import { MP } from "../types"
 
 export type MPsContextType = {
-  data: MP[]
-  isLoading: boolean
+  MPsData: MP[]
+  isLoadingMPs: boolean
   MPsFetchData: () => void
 }
 
@@ -14,27 +14,27 @@ type MPsProps = {
 }
 
 export default function MPsProvider({ children }: MPsProps) {
-  const [data, setData] = useState<MP[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [MPsData, setMPsData] = useState<MP[]>([])
+  const [isLoadingMPs, setIsLoadingMPs] = useState<boolean>(true)
 
   const MPsFetchData = useCallback(async () => {
-    setIsLoading(true)
+    setIsLoadingMPs(true)
     try {
       const response = await fetch("https://api.sejm.gov.pl/sejm/term10/MP")
       if (!response.ok) {
         throw new Error("Error")
       }
       const data = await response.json()
-      setData(data)
+      setMPsData(data)
     } catch (error) {
       console.log(error)
     } finally {
-      setIsLoading(false)
+      setIsLoadingMPs(false)
     }
   }, [])
 
   return (
-    <MPsContext.Provider value={{ data, isLoading, MPsFetchData }}>
+    <MPsContext.Provider value={{ MPsData, isLoadingMPs, MPsFetchData }}>
       {children}
     </MPsContext.Provider>
   )

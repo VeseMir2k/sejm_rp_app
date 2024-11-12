@@ -1,6 +1,16 @@
 export type MP = {
   id: string
   firstLastName: string
+  club: string
+}
+
+export type Club = {
+  email: string
+  fax: string
+  id: string
+  membersCount: number
+  name: string
+  phone: string
 }
 
 export type AppBarComponentProps = {

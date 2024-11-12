@@ -18,6 +18,7 @@ export default function PaginationComponent({
   const endIdx = startIdx + itemsPerPage
 
   useEffect(() => {
+    console.log(data)
     setCurrentData(data.slice(startIdx, endIdx))
   }, [setCurrentData, currentPage])
 

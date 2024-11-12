@@ -7,7 +7,7 @@ export default function Committees() {
 
   useEffect(() => {
     setTitle("Komisje")
-  }, [])
+  }, [setTitle])
 
   return <h2>Committees</h2>
 }

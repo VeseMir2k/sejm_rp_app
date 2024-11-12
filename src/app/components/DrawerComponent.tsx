@@ -44,7 +44,10 @@ export default function DrawerComponent({
       <Toolbar />
       <List>
         {menu.map((item) => {
-          const isActive = pathname === item.href
+          const isActive =
+            item.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(item.href)
           return (
             <Link
               style={{ color: "white", textDecoration: "none" }}

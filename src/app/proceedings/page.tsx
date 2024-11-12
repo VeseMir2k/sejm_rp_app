@@ -1,7 +1,9 @@
 "use client"
+
 import { useAppBar } from "../context/AppBarContext"
 import { useProceedings } from "../context/ProceedingsContext"
 import { useEffect } from "react"
+import Link from "next/link"
 
 export default function Proceedings() {
   const { setTitle } = useAppBar()
@@ -16,7 +18,12 @@ export default function Proceedings() {
     <>
       <h2>Proceedings</h2>
       {ProceedingsData.map((item) => (
-        <p key={item.title}>{item.title}</p>
+        <Link
+          key={item.title}
+          href={`/proceedings/${item.number}`}
+        >
+          <h4 style={{ color: "white" }}>{item.title}</h4>
+        </Link>
       ))}
     </>
   )

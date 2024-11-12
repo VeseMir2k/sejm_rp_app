@@ -17,9 +17,9 @@ export default function MembersOfParliament() {
   const { MPsFetchData, MPsData, isLoadingMPs } = useMPs()
   const { clubsFetchData, clubsData } = useClubs()
   const { setTitle } = useAppBar()
+
   const [currentData, setCurrentData] = useState<MP[]>([])
   const [filterData, setFilterData] = useState<MP[]>([])
-
   const [selectClub, setSelectClub] = useState("All")
 
   const handleSelect = (event: SelectChangeEvent) => {
@@ -39,7 +39,7 @@ export default function MembersOfParliament() {
         : MPsData.filter((item) => item.club === selectClub)
 
     setFilterData(filtered)
-    setCurrentData(filtered.slice(0, itemsPerPage)) // Ustawienie pierwszej strony danych na podstawie filterData
+    setCurrentData(filtered.slice(0, itemsPerPage))
   }, [selectClub, MPsData])
 
   if (isLoadingMPs) return <p>Ładowanie...</p>
@@ -65,11 +65,13 @@ export default function MembersOfParliament() {
           </Grid2>
         ))}
       </Grid2>
-      <PaginationComponent
-        itemsPerPage={itemsPerPage}
-        data={filterData}
-        setCurrentData={setCurrentData}
-      />
+      {filterData.length > 0 && (
+        <PaginationComponent
+          itemsPerPage={itemsPerPage}
+          data={filterData}
+          setCurrentData={setCurrentData}
+        />
+      )}
     </Container>
   )
 }

@@ -12,6 +12,11 @@ export type Club = {
   name: string
   phone: string
 }
+export type Proceeding = {
+  dates: string[]
+  number: number
+  title: string
+}
 
 export type AppBarComponentProps = {
   isClosing: boolean
@@ -24,9 +29,9 @@ export type MPCardComponentProps = {
 }
 
 export type PaginationComponentProps = {
-  data: any[]
+  data: MP[]
   itemsPerPage: number
-  setCurrentData: (data: any[]) => void
+  setCurrentData: (data: MP[]) => void
 }
 
 export type DrawerComponentProps = {

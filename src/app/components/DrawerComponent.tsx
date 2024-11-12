@@ -1,6 +1,5 @@
 "use client"
 
-import Divider from "@mui/material/Divider"
 import Drawer from "@mui/material/Drawer"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
@@ -37,13 +36,12 @@ export default function DrawerComponent({
     { name: "Kluby i koła", href: "/clubs-and-groups" },
     { name: "Posłowie", href: "/members-of-parliament" },
     { name: "Komisje", href: "/committees" },
-    { name: "Terminarz", href: "/timetable" },
+    { name: "Obrady", href: "/proceedings" },
   ]
 
   const drawer = (
     <>
       <Toolbar />
-      <Divider />
       <List>
         {menu.map((item) => {
           const isActive = pathname === item.href

@@ -1,13 +1,15 @@
 import { createContext, useContext, useState, useCallback } from "react"
 import { Proceeding } from "../types"
 
-export type MPsContextType = {
+export type ProceedingsContextType = {
   ProceedingsData: Proceeding[]
   isLoadingProceedings: boolean
   ProceedingsFetchData: () => void
 }
 
-const ProceedingsContext = createContext<MPsContextType | undefined>(undefined)
+const ProceedingsContext = createContext<ProceedingsContextType | undefined>(
+  undefined
+)
 
 type ProceedingsProps = {
   children: React.ReactNode

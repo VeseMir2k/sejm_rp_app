@@ -11,6 +11,7 @@ import MPsProvider from "./context/MPsContext"
 import AppBarProvider from "./context/AppBarContext"
 import ClubsProvider from "./context/ClubsContext"
 import ProceedingsProvider from "./context/ProceedingsContext"
+import ProceedingProvider from "./context/ProceedingContext"
 
 const darkTheme = createTheme({
   palette: {
@@ -34,42 +35,47 @@ export default function RootLayout({ children }: Props) {
         <MPsProvider>
           <ClubsProvider>
             <ProceedingsProvider>
-              <AppBarProvider>
-                <ThemeProvider theme={darkTheme}>
-                  <Box sx={{ display: "flex" }}>
-                    <CssBaseline />
-                    <AppBarComponent
-                      drawerWidth={drawerWidth}
-                      isClosing={isClosing}
-                      setMobileOpen={setMobileOpen}
-                      mobileOpen={mobileOpen}
-                    />
-                    <Box
-                      component="nav"
-                      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                      aria-label="mailbox folders"
-                    >
-                      <DrawerComponent
-                        setIsClosing={setIsClosing}
+              <ProceedingProvider>
+                <AppBarProvider>
+                  <ThemeProvider theme={darkTheme}>
+                    <Box sx={{ display: "flex" }}>
+                      <CssBaseline />
+                      <AppBarComponent
+                        drawerWidth={drawerWidth}
+                        isClosing={isClosing}
                         setMobileOpen={setMobileOpen}
                         mobileOpen={mobileOpen}
-                        drawerWidth={drawerWidth}
                       />
+                      <Box
+                        component="nav"
+                        sx={{
+                          width: { sm: drawerWidth },
+                          flexShrink: { sm: 0 },
+                        }}
+                        aria-label="mailbox folders"
+                      >
+                        <DrawerComponent
+                          setIsClosing={setIsClosing}
+                          setMobileOpen={setMobileOpen}
+                          mobileOpen={mobileOpen}
+                          drawerWidth={drawerWidth}
+                        />
+                      </Box>
+                      <Box
+                        component="main"
+                        sx={{
+                          flexGrow: 1,
+                          p: 3,
+                          width: { sm: `calc(100% - ${drawerWidth}px)` },
+                        }}
+                      >
+                        <Toolbar />
+                        {children}
+                      </Box>
                     </Box>
-                    <Box
-                      component="main"
-                      sx={{
-                        flexGrow: 1,
-                        p: 3,
-                        width: { sm: `calc(100% - ${drawerWidth}px)` },
-                      }}
-                    >
-                      <Toolbar />
-                      {children}
-                    </Box>
-                  </Box>
-                </ThemeProvider>
-              </AppBarProvider>
+                  </ThemeProvider>
+                </AppBarProvider>
+              </ProceedingProvider>
             </ProceedingsProvider>
           </ClubsProvider>
         </MPsProvider>

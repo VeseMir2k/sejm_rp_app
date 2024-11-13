@@ -12,7 +12,7 @@ type AppBarProps = {
 }
 
 export default function AppBarProvider({ children }: AppBarProps) {
-  const [title, setTitle] = React.useState<string>("Home")
+  const [title, setTitle] = React.useState<string>("")
 
   return (
     <AppBarContext.Provider value={{ title, setTitle }}>

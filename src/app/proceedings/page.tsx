@@ -16,7 +16,6 @@ export default function Proceedings() {
 
   return (
     <>
-      <h2>Proceedings</h2>
       {ProceedingsData.map((item) => (
         <Link
           key={item.title}

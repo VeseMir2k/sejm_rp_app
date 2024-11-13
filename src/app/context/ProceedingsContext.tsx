@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useCallback } from "react"
 import { Proceeding } from "../types"
 
 export type ProceedingsContextType = {
-  ProceedingsData: Proceeding[]
+  ProceedingsData: Proceeding[] | null
   isLoadingProceedings: boolean
   ProceedingsFetchData: () => void
 }

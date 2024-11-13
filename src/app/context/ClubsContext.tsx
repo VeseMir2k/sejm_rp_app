@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useCallback } from "react"
 import { Club } from "../types"
 
 export type ClubsContextType = {
-  clubsData: Club[]
+  clubsData: Club[] | null
   isLoadingClubs: boolean
   clubsFetchData: () => void
 }

@@ -38,6 +38,26 @@ export type Proceeding = {
   title: string
 }
 
+//! TranscriptsList
+export type TranscriptsList = {
+  date: string
+  proceedingNum: number
+  statements: TranscriptsListMember[]
+}
+
+//! TranscriptsListMember
+export type TranscriptsListMember = {
+  endDateTime: string
+  function: string
+  memberID: number
+  name: string
+  num: number
+  rapporteur: boolean
+  secretary: boolean
+  startDateTime: string
+  unspoken: boolean
+}
+
 //! AppBarComponentProps
 export type AppBarComponentProps = {
   isClosing: boolean

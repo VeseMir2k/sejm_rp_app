@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useCallback } from "react"
 import { MP } from "../types"
 
 export type MPsContextType = {
-  MPsData: MP[]
+  MPsData: MP[] | null
   isLoadingMPs: boolean
   MPsFetchData: () => void
 }

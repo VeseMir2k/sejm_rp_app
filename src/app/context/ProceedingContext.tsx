@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { Proceeding } from "../types"
+import { Proceeding } from "../types/ProceedingType"
 
 export type ProceedingContextType = {
   ProceedingData: Proceeding | null

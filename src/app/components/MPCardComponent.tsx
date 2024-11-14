@@ -1,7 +1,11 @@
 import { Typography } from "@mui/material"
 import Link from "next/link"
 import Image from "next/image"
-import { MPCardComponentProps } from "../types"
+import { MP } from "../types/MPType"
+
+export type MPCardComponentProps = {
+  item: MP
+}
 
 export default function MPCardComponent({ item }: MPCardComponentProps) {
   return (

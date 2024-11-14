@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { Club } from "../types"
+import { Club } from "../types/ClubType"
 
 export type ClubsContextType = {
   clubsData: Club[] | null

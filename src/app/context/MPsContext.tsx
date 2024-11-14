@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { MP } from "../types"
+import { MP } from "../types/MPType"
 
 export type MPsContextType = {
   MPsData: MP[] | null

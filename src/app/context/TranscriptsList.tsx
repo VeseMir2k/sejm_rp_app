@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { TranscriptsList } from "../types"
+import { TranscriptsList } from "../types/TranscriptsListType"
 
 export type TranscriptsListContextType = {
   TranscriptsListData: TranscriptsList | null

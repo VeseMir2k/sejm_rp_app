@@ -4,7 +4,13 @@ import { useEffect, useState } from "react"
 import { Stack, Pagination, PaginationItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-import { PaginationComponentProps } from "../types"
+import { MP } from "../types/MPType"
+
+type PaginationComponentProps = {
+  data: MP[]
+  itemsPerPage: number
+  setCurrentData: (data: MP[]) => void
+}
 
 export default function PaginationComponent({
   data,
@@ -18,9 +24,8 @@ export default function PaginationComponent({
   const endIdx = startIdx + itemsPerPage
 
   useEffect(() => {
-    console.log(data)
     setCurrentData(data.slice(startIdx, endIdx))
-  }, [setCurrentData, currentPage])
+  }, [setCurrentData, currentPage, data, startIdx, endIdx])
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,

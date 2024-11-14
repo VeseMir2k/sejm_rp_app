@@ -3,8 +3,14 @@ import IconButton from "@mui/material/IconButton"
 import Typography from "@mui/material/Typography"
 import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
-import { AppBarComponentProps } from "../types"
 import { useAppBar } from "../context/AppBarContext"
+
+type AppBarComponentProps = {
+  isClosing: boolean
+  setMobileOpen: (mobileOpen: boolean) => void
+  mobileOpen: boolean
+  drawerWidth: number
+}
 
 export default function AppBarComponent({
   isClosing,
@@ -19,6 +25,7 @@ export default function AppBarComponent({
       setMobileOpen(!mobileOpen)
     }
   }
+
   return (
     <AppBar
       position="fixed"

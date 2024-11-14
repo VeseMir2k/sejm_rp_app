@@ -8,7 +8,14 @@ import ListItemText from "@mui/material/ListItemText"
 import Toolbar from "@mui/material/Toolbar"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { DrawerComponentProps } from "../types"
+
+type DrawerComponentProps = {
+  window?: () => Window
+  setIsClosing: (isClosing: boolean) => void
+  setMobileOpen: (mobileOpen: boolean) => void
+  mobileOpen: boolean
+  drawerWidth: number
+}
 
 export default function DrawerComponent({
   window,

@@ -13,7 +13,13 @@ type ProceedingPost = {
 export default function Proceeding({}: ProceedingPost) {
   const { setTitle } = useAppBar()
   const { ProceedingFetchData, ProceedingData } = useProceeding()
-  const { TranscriptsListFetchData, TranscriptsListData } = useTranscriptsList()
+  const {
+    TranscriptsListFetchData,
+    TranscriptsListData,
+    statementsList,
+    setStatementsList,
+  } = useTranscriptsList()
+  // const { statements, setStatements } = useState([])
 
   const params = useParams()
   const slug = typeof params.slug === "string" ? params.slug : undefined
@@ -32,14 +38,17 @@ export default function Proceeding({}: ProceedingPost) {
 
   useEffect(() => {
     if (slug) {
-      TranscriptsListFetchData(slug, "2023-11-13")
+      setStatementsList([])
+      ProceedingData?.dates.map((item) => {
+        TranscriptsListFetchData(slug, item)
+      })
     }
-  }, [TranscriptsListFetchData, slug])
+  }, [ProceedingData, TranscriptsListFetchData, slug, setStatementsList])
 
   return (
     <div>
-      {TranscriptsListData?.statements.map((item) => (
-        <h3 key={item.num}>{item.name}</h3>
+      {statementsList?.map((item, index) => (
+        <h3 key={index}>{item.name}</h3>
       ))}
     </div>
   )

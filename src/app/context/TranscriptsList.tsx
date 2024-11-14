@@ -22,6 +22,7 @@ export default function TranscriptsListProvider({
     useState<TranscriptsList | null>(null)
   const [isLoadingTranscriptsList, setIsLoadingTranscriptsList] =
     useState<boolean>(true)
+  const [statementsList, setStatementsList] = useState([])
 
   const TranscriptsListFetchData = useCallback(
     async (proceeding: string, date: string) => {
@@ -35,6 +36,10 @@ export default function TranscriptsListProvider({
         }
         const data = await response.json()
         setTranscriptsListData(data)
+        setStatementsList((prevStatementsList) => [
+          ...prevStatementsList,
+          ...(data.statements || []),
+        ])
       } catch (error) {
         console.log(error)
       } finally {
@@ -50,6 +55,8 @@ export default function TranscriptsListProvider({
         TranscriptsListData,
         isLoadingTranscriptsList,
         TranscriptsListFetchData,
+        statementsList,
+        setStatementsList,
       }}
     >
       {children}

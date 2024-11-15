@@ -1,10 +1,11 @@
-import { createContext, useContext, useState, useCallback } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 import { TranscriptsList } from "../types/TranscriptsListType"
+import { fetchTranscripts } from "../api/fetchTranscripts"
 
 export type TranscriptsListContextType = {
   TranscriptsListData: TranscriptsList | null
   isLoadingTranscriptsList: boolean
-  TranscriptsListFetchData: (proceeding: string, date: string) => void
+  setProceedingAndDate: (proceeding: string, date: string) => void
 }
 
 const TranscriptsListContext = createContext<
@@ -22,41 +23,38 @@ export default function TranscriptsListProvider({
     useState<TranscriptsList | null>(null)
   const [isLoadingTranscriptsList, setIsLoadingTranscriptsList] =
     useState<boolean>(true)
-  const [statementsList, setStatementsList] = useState([])
+  const [proceeding, setProceeding] = useState<string>("")
+  const [date, setDate] = useState<string>("")
 
-  const TranscriptsListFetchData = useCallback(
-    async (proceeding: string, date: string) => {
+  const setProceedingAndDate = (newProceeding: string, newDate: string) => {
+    setProceeding(newProceeding)
+    setDate(newDate)
+  }
+
+  useEffect(() => {
+    const fetchTranscriptsData = async () => {
       setIsLoadingTranscriptsList(true)
       try {
-        const response = await fetch(
-          `https://api.sejm.gov.pl/sejm/term10/proceedings/${proceeding}/${date}/transcripts`
-        )
-        if (!response.ok) {
-          throw new Error("Error")
-        }
-        const data = await response.json()
+        const data = await fetchTranscripts(proceeding, date)
         setTranscriptsListData(data)
-        setStatementsList((prevStatementsList) => [
-          ...prevStatementsList,
-          ...(data.statements || []),
-        ])
       } catch (error) {
-        console.log(error)
+        console.log("Error fetching transcripts data:", error)
       } finally {
         setIsLoadingTranscriptsList(false)
       }
-    },
-    []
-  )
+    }
+
+    if (proceeding && date) {
+      fetchTranscriptsData()
+    }
+  }, [proceeding, date])
 
   return (
     <TranscriptsListContext.Provider
       value={{
         TranscriptsListData,
         isLoadingTranscriptsList,
-        TranscriptsListFetchData,
-        statementsList,
-        setStatementsList,
+        setProceedingAndDate,
       }}
     >
       {children}
@@ -67,7 +65,9 @@ export default function TranscriptsListProvider({
 export function useTranscriptsList() {
   const context = useContext(TranscriptsListContext)
   if (!context) {
-    throw new Error("useProceeding must be used within a ProceedingsProvider")
+    throw new Error(
+      "useTranscriptsList must be used within a TranscriptsListProvider"
+    )
   }
   return context
 }

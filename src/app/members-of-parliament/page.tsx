@@ -8,13 +8,13 @@ import { useAppBar } from "../context/AppBarContext"
 import MPCardComponent from "../components/MPCardComponent"
 import { useEffect, useState } from "react"
 import PaginationComponent from "../components/PaginationComponent"
-import { MP } from "../types"
+import { MP } from "../types/MPType"
 import SelectComponent from "../components/SelectComponent"
 
 const itemsPerPage = 18
 
 export default function MembersOfParliament() {
-  const { MPsFetchData, MPsData, isLoadingMPs } = useMPs()
+  const { MPsData, isLoadingMPs, MPsFetchData } = useMPs()
   const { clubsFetchData, clubsData } = useClubs()
   const { setTitle } = useAppBar()
 
@@ -35,8 +35,8 @@ export default function MembersOfParliament() {
   useEffect(() => {
     const filtered =
       selectClub === "All"
-        ? MPsData
-        : MPsData.filter((item) => item.club === selectClub)
+        ? MPsData || []
+        : MPsData?.filter((item) => item.club === selectClub) || []
 
     setFilterData(filtered)
     setCurrentData(filtered.slice(0, itemsPerPage))

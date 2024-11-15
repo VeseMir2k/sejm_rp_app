@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback } from "react"
 import { Proceeding } from "../types/ProceedingType"
+import { fetchProceeding } from "../api/fetchProceeding"
 
 export type ProceedingContextType = {
   ProceedingData: Proceeding | null
@@ -22,13 +23,7 @@ export default function ProceedingsProvider({ children }: ProceedingProps) {
   const ProceedingFetchData = useCallback(async (proceeding: string) => {
     setIsLoadingProceeding(true)
     try {
-      const response = await fetch(
-        `https://api.sejm.gov.pl/sejm/term10/proceedings/${proceeding}`
-      )
-      if (!response.ok) {
-        throw new Error("Error")
-      }
-      const data = await response.json()
+      const data = await fetchProceeding(proceeding)
       setProceedingData(data)
     } catch (error) {
       console.log(error)

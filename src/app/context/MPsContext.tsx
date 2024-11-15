@@ -1,40 +1,41 @@
 import { createContext, useContext, useState, useCallback } from "react"
 import { MP } from "../types/MPType"
+import { fetchMPs } from "../api/fetchMps"
 
 export type MPsContextType = {
   MPsData: MP[] | null
   isLoadingMPs: boolean
+  error: string | null
   MPsFetchData: () => void
 }
 
 const MPsContext = createContext<MPsContextType | undefined>(undefined)
 
-type MPsProps = {
+type MPsProviderProps = {
   children: React.ReactNode
 }
 
-export default function MPsProvider({ children }: MPsProps) {
-  const [MPsData, setMPsData] = useState<MP[]>([])
+export default function MPsProvider({ children }: MPsProviderProps) {
+  const [MPsData, setMPsData] = useState<MP[] | null>(null)
   const [isLoadingMPs, setIsLoadingMPs] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
 
   const MPsFetchData = useCallback(async () => {
     setIsLoadingMPs(true)
+    setError(null)
     try {
-      const response = await fetch("https://api.sejm.gov.pl/sejm/term10/MP")
-      if (!response.ok) {
-        throw new Error("Error")
-      }
-      const data = await response.json()
+      const data = await fetchMPs()
       setMPsData(data)
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      console.error("Error fetching MPs data:", err)
+      setError("Nie udało się załadować danych posłów.")
     } finally {
       setIsLoadingMPs(false)
     }
   }, [])
 
   return (
-    <MPsContext.Provider value={{ MPsData, isLoadingMPs, MPsFetchData }}>
+    <MPsContext.Provider value={{ MPsData, isLoadingMPs, error, MPsFetchData }}>
       {children}
     </MPsContext.Provider>
   )

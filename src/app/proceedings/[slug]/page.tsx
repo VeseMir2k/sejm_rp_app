@@ -4,7 +4,7 @@ import { useAppBar } from "@/app/context/AppBarContext"
 import { useEffect } from "react"
 import { useParams } from "next/navigation"
 import { useProceeding } from "@/app/context/ProceedingContext"
-import { useTranscriptsList } from "@/app/context/TranscriptsList"
+import AccordionComponent from "./AccordionComponent"
 
 type ProceedingPost = {
   params?: { slug: string | string[] | undefined }
@@ -13,13 +13,6 @@ type ProceedingPost = {
 export default function Proceeding({}: ProceedingPost) {
   const { setTitle } = useAppBar()
   const { ProceedingFetchData, ProceedingData } = useProceeding()
-  const {
-    TranscriptsListFetchData,
-    TranscriptsListData,
-    statementsList,
-    setStatementsList,
-  } = useTranscriptsList()
-  // const { statements, setStatements } = useState([])
 
   const params = useParams()
   const slug = typeof params.slug === "string" ? params.slug : undefined
@@ -36,20 +29,17 @@ export default function Proceeding({}: ProceedingPost) {
     }
   }, [ProceedingFetchData, slug])
 
-  useEffect(() => {
-    if (slug) {
-      setStatementsList([])
-      ProceedingData?.dates.map((item) => {
-        TranscriptsListFetchData(slug, item)
-      })
-    }
-  }, [ProceedingData, TranscriptsListFetchData, slug, setStatementsList])
+  useEffect(() => {}, [])
 
   return (
-    <div>
-      {statementsList?.map((item, index) => (
-        <h3 key={index}>{item.name}</h3>
+    <>
+      {ProceedingData?.dates.map((item) => (
+        <AccordionComponent
+          key={item}
+          date={item}
+          slug={slug}
+        />
       ))}
-    </div>
+    </>
   )
 }

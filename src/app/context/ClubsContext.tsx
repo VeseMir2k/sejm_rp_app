@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useCallback } from "react"
 import { Club } from "../types/ClubType"
+import { fetchClubs } from "../api/fetchClubs"
 
 export type ClubsContextType = {
   clubsData: Club[] | null
@@ -20,11 +21,7 @@ export default function ClubsProvider({ children }: ClubsProps) {
   const clubsFetchData = useCallback(async () => {
     setIsLoadingClubs(true)
     try {
-      const response = await fetch("https://api.sejm.gov.pl/sejm/term10/clubs")
-      if (!response.ok) {
-        throw new Error("Error")
-      }
-      const data = await response.json()
+      const data = await fetchClubs()
       setClubsData(data)
     } catch (error) {
       console.log(error)

@@ -3,7 +3,7 @@ import AppBarProvider from "./AppBarContext"
 import ClubsProvider from "./ClubsContext"
 import ProceedingsProvider from "./ProceedingsContext"
 import ProceedingProvider from "./ProceedingContext"
-import TranscriptsListProvider from "./TranscriptsList"
+import TranscriptsListProvider from "./TranscriptsListContext"
 
 type AppProviderProps = {
   children: React.ReactNode

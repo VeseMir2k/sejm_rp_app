@@ -1,4 +1,4 @@
-import { TranscriptPerson } from "./TranscriptPerson"
+import { TranscriptPerson } from "./TranscriptPersonType"
 
 //! TranscriptsList
 export type TranscriptsList = {

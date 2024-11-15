@@ -1,61 +1,54 @@
-import { createContext, useContext, useState, useEffect } from "react"
-import { TranscriptsList } from "../types/TranscriptsListType"
-import { fetchTranscripts } from "../api/fetchTranscripts"
+import { createContext, useContext, useState } from "react"
+import { fetchTranscripts } from "@/app/api/fetchTranscripts"
 
-export type TranscriptsListContextType = {
-  TranscriptsListData: TranscriptsList | null
-  isLoadingTranscriptsList: boolean
-  setProceedingAndDate: (proceeding: string, date: string) => void
+type TranscriptsState = {
+  [key: string]: {
+    data: { statements: { name: string }[] } | null
+    isLoading: boolean
+  }
+}
+
+type TranscriptsListContextType = {
+  transcriptsState: TranscriptsState
+  fetchTranscriptsData: (slug: string, date: string) => void
 }
 
 const TranscriptsListContext = createContext<
   TranscriptsListContextType | undefined
 >(undefined)
 
-type TranscriptsListProps = {
-  children: React.ReactNode
-}
-
-export default function TranscriptsListProvider({
+export function TranscriptsListProvider({
   children,
-}: TranscriptsListProps) {
-  const [TranscriptsListData, setTranscriptsListData] =
-    useState<TranscriptsList | null>(null)
-  const [isLoadingTranscriptsList, setIsLoadingTranscriptsList] =
-    useState<boolean>(true)
-  const [proceeding, setProceeding] = useState<string>("")
-  const [date, setDate] = useState<string>("")
+}: {
+  children: React.ReactNode
+}) {
+  const [transcriptsState, setTranscriptsState] = useState<TranscriptsState>({})
 
-  const setProceedingAndDate = (newProceeding: string, newDate: string) => {
-    setProceeding(newProceeding)
-    setDate(newDate)
+  const fetchTranscriptsData = async (slug: string, date: string) => {
+    const key = `${slug}-${date}`
+    setTranscriptsState((prevState) => ({
+      ...prevState,
+      [key]: { data: null, isLoading: true },
+    }))
+
+    try {
+      const data = await fetchTranscripts(slug, date)
+      setTranscriptsState((prevState) => ({
+        ...prevState,
+        [key]: { data, isLoading: false },
+      }))
+    } catch (error) {
+      console.error("Error fetching transcripts:", error)
+      setTranscriptsState((prevState) => ({
+        ...prevState,
+        [key]: { data: null, isLoading: false },
+      }))
+    }
   }
-
-  useEffect(() => {
-    const fetchTranscriptsData = async () => {
-      setIsLoadingTranscriptsList(true)
-      try {
-        const data = await fetchTranscripts(proceeding, date)
-        setTranscriptsListData(data)
-      } catch (error) {
-        console.log("Error fetching transcripts data:", error)
-      } finally {
-        setIsLoadingTranscriptsList(false)
-      }
-    }
-
-    if (proceeding && date) {
-      fetchTranscriptsData()
-    }
-  }, [proceeding, date])
 
   return (
     <TranscriptsListContext.Provider
-      value={{
-        TranscriptsListData,
-        isLoadingTranscriptsList,
-        setProceedingAndDate,
-      }}
+      value={{ transcriptsState, fetchTranscriptsData }}
     >
       {children}
     </TranscriptsListContext.Provider>

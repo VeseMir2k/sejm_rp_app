@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import Link from "next/link"
 import Stack from "@mui/material/Stack"
 import { styled } from "@mui/material/styles"
-import { Typography } from "@mui/material"
+import { Button } from "@mui/material"
 
 const StyledLink = styled(Link)({
   textDecoration: "none",
@@ -27,7 +27,9 @@ export default function Proceedings() {
     const month = date.getMonth() + 1
     const day = date.getDate()
 
-    return `${year}-${month}-${day}`
+    return `${year}-${month < 10 ? `0${month}` : month}-${
+      day < 10 ? `0${day}` : day
+    }`
   }
 
   const checkDate = (date_1: string, date_2: string) => {
@@ -35,11 +37,11 @@ export default function Proceedings() {
     const date2 = new Date(date_2)
 
     if (date1 < date2) {
-      return "blue"
+      return ["#43a047", "#1b5e20"]
     } else if (date1 > date2) {
-      return "green"
+      return ["#e53935", "#b71c1c"]
     } else {
-      return "red"
+      return ["#7cb342", "#33691e"]
     }
   }
 
@@ -54,25 +56,29 @@ export default function Proceedings() {
             useFlexGap
             sx={{ flexWrap: "wrap" }}
           >
-            {proceeding.dates.map((date) => (
-              <StyledLink
-                key={date}
-                href={`proceedings/${proceeding.number}_${date}`}
-              >
-                <Typography
-                  variant="body2"
-                  sx={{
-                    backgroundColor: checkDate(currentDate(), date),
-                    color: "rgba(255, 255, 255, 0.7)",
-                    textAlign: "center",
-                    padding: "8px",
-                    borderRadius: "4px",
-                  }}
+            {proceeding.dates.map((date) => {
+              const [color_1, color_2] = checkDate(date, currentDate())
+              return (
+                <Link
+                  key={date}
+                  href={`/proceedings/${proceeding.number}_${date}`}
                 >
-                  {date}
-                </Typography>
-              </StyledLink>
-            ))}
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      color: color_1,
+                      borderColor: color_1,
+                      "&:hover": {
+                        borderColor: color_2,
+                        color: color_2,
+                      },
+                    }}
+                  >
+                    {date}
+                  </Button>
+                </Link>
+              )
+            })}
           </Stack>
         </div>
       ))}

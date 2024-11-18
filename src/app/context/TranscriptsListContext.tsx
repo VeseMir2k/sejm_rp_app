@@ -53,7 +53,6 @@ export default function TranscriptsListProvider({
         TranscriptsListData,
         isLoadingTranscriptsList,
         TranscriptsListFetchData,
-        setTranscriptsListData,
       }}
     >
       {children}

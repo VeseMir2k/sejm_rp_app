@@ -4,24 +4,13 @@ import { useAppBar } from "../context/AppBarContext"
 import { useProceedings } from "../context/ProceedingsContext"
 import { useEffect } from "react"
 import Link from "next/link"
-import Paper from "@mui/material/Paper"
 import Stack from "@mui/material/Stack"
 import { styled } from "@mui/material/styles"
+import { Typography } from "@mui/material"
 
 const StyledLink = styled(Link)({
   textDecoration: "none",
 })
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles("dark", {
-    backgroundColor: "#1A2027",
-  }),
-}))
 
 export default function Proceedings() {
   const { setTitle } = useAppBar()
@@ -31,6 +20,28 @@ export default function Proceedings() {
     ProceedingsFetchData()
     setTitle("Obrady")
   }, [setTitle, ProceedingsFetchData])
+
+  const currentDate = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+
+    return `${year}-${month}-${day}`
+  }
+
+  const checkDate = (date_1: string, date_2: string) => {
+    const date1 = new Date(date_1)
+    const date2 = new Date(date_2)
+
+    if (date1 < date2) {
+      return "blue"
+    } else if (date1 > date2) {
+      return "green"
+    } else {
+      return "red"
+    }
+  }
 
   return (
     <>
@@ -48,7 +59,18 @@ export default function Proceedings() {
                 key={date}
                 href={`proceedings/${proceeding.number}_${date}`}
               >
-                <Item>{date}</Item>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    backgroundColor: checkDate(currentDate(), date),
+                    color: "rgba(255, 255, 255, 0.7)",
+                    textAlign: "center",
+                    padding: "8px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  {date}
+                </Typography>
               </StyledLink>
             ))}
           </Stack>

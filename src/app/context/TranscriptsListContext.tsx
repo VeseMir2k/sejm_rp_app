@@ -3,6 +3,7 @@ import { TranscriptsList } from "../types/TranscriptsListType"
 
 export type TranscriptsListContextType = {
   TranscriptsListData: TranscriptsList | null
+
   isLoadingTranscriptsList: boolean
   TranscriptsListFetchData: (proceeding: string, date: string) => void
 }
@@ -26,6 +27,7 @@ export default function TranscriptsListProvider({
 
   const TranscriptsListFetchData = useCallback(
     async (proceeding: string, date: string) => {
+      setTranscriptsListData(null)
       setIsLoadingTranscriptsList(true)
       try {
         const response = await fetch(
@@ -51,6 +53,7 @@ export default function TranscriptsListProvider({
         TranscriptsListData,
         isLoadingTranscriptsList,
         TranscriptsListFetchData,
+        setTranscriptsListData,
       }}
     >
       {children}

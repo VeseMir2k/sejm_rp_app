@@ -1,54 +1,57 @@
-import { createContext, useContext, useState } from "react"
-import { fetchTranscripts } from "@/app/api/fetchTranscripts"
+import { createContext, useContext, useState, useCallback } from "react"
+import { TranscriptsList } from "../types/TranscriptsListType"
 
-type TranscriptsState = {
-  [key: string]: {
-    data: { statements: { name: string }[] } | null
-    isLoading: boolean
-  }
-}
-
-type TranscriptsListContextType = {
-  transcriptsState: TranscriptsState
-  fetchTranscriptsData: (slug: string, date: string) => void
+export type TranscriptsListContextType = {
+  TranscriptsListData: TranscriptsList | null
+  isLoadingTranscriptsList: boolean
+  TranscriptsListFetchData: (proceeding: string, date: string) => void
 }
 
 const TranscriptsListContext = createContext<
   TranscriptsListContextType | undefined
 >(undefined)
 
-export function TranscriptsListProvider({
-  children,
-}: {
+type TranscriptsListProps = {
   children: React.ReactNode
-}) {
-  const [transcriptsState, setTranscriptsState] = useState<TranscriptsState>({})
+}
 
-  const fetchTranscriptsData = async (slug: string, date: string) => {
-    const key = `${slug}-${date}`
-    setTranscriptsState((prevState) => ({
-      ...prevState,
-      [key]: { data: null, isLoading: true },
-    }))
+export default function TranscriptsListProvider({
+  children,
+}: TranscriptsListProps) {
+  const [TranscriptsListData, setTranscriptsListData] =
+    useState<TranscriptsList | null>(null)
 
-    try {
-      const data = await fetchTranscripts(slug, date)
-      setTranscriptsState((prevState) => ({
-        ...prevState,
-        [key]: { data, isLoading: false },
-      }))
-    } catch (error) {
-      console.error("Error fetching transcripts:", error)
-      setTranscriptsState((prevState) => ({
-        ...prevState,
-        [key]: { data: null, isLoading: false },
-      }))
-    }
-  }
+  const [isLoadingTranscriptsList, setIsLoadingTranscriptsList] =
+    useState<boolean>(true)
+
+  const TranscriptsListFetchData = useCallback(
+    async (proceeding: string, date: string) => {
+      setIsLoadingTranscriptsList(true)
+      try {
+        const response = await fetch(
+          `https://api.sejm.gov.pl/sejm/term10/proceedings/${proceeding}/${date}/transcripts`
+        )
+        if (!response.ok) {
+          throw new Error("Error")
+        }
+        const data = await response.json()
+        setTranscriptsListData(data)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setIsLoadingTranscriptsList(false)
+      }
+    },
+    []
+  )
 
   return (
     <TranscriptsListContext.Provider
-      value={{ transcriptsState, fetchTranscriptsData }}
+      value={{
+        TranscriptsListData,
+        isLoadingTranscriptsList,
+        TranscriptsListFetchData,
+      }}
     >
       {children}
     </TranscriptsListContext.Provider>
@@ -58,9 +61,7 @@ export function TranscriptsListProvider({
 export function useTranscriptsList() {
   const context = useContext(TranscriptsListContext)
   if (!context) {
-    throw new Error(
-      "useTranscriptsList must be used within a TranscriptsListProvider"
-    )
+    throw new Error("useProceeding must be used within a ProceedingsProvider")
   }
   return context
 }

@@ -1,44 +1,29 @@
 "use client"
 
-import { useAppBar } from "@/app/context/AppBarContext"
 import { useEffect } from "react"
 import { useParams } from "next/navigation"
-import { useProceeding } from "@/app/context/ProceedingContext"
-import AccordionComponent from "./AccordionComponent"
+import { useTranscriptsList } from "@/app/context/TranscriptsListContext"
 
-type ProceedingPost = {
-  params?: { slug: string | string[] | undefined }
-}
-
-export default function Proceeding({}: ProceedingPost) {
-  const { setTitle } = useAppBar()
-  const { ProceedingFetchData, ProceedingData } = useProceeding()
-
+export default function Proceeding() {
   const params = useParams()
-  const slug = typeof params.slug === "string" ? params.slug : undefined
+
+  const { TranscriptsListFetchData, TranscriptsListData } = useTranscriptsList()
 
   useEffect(() => {
-    if (ProceedingData?.title) {
-      setTitle(ProceedingData.title)
-    }
-  }, [setTitle, ProceedingData?.title])
+    if (typeof params.slug === "string") {
+      const result = params.slug.trim().split("_")
+      console.log(result)
 
-  useEffect(() => {
-    if (slug) {
-      ProceedingFetchData(slug)
+      TranscriptsListFetchData(result[0], result[1])
+    } else {
+      console.log("Slug is not a string or is undefined:", params.slug)
     }
-  }, [ProceedingFetchData, slug])
-
-  useEffect(() => {}, [])
+  }, [params.slug])
 
   return (
     <>
-      {ProceedingData?.dates.map((item) => (
-        <AccordionComponent
-          key={item}
-          date={item}
-          slug={slug}
-        />
+      {TranscriptsListData?.statements.map((item) => (
+        <h6 key={item.num}>{item.name}</h6>
       ))}
     </>
   )

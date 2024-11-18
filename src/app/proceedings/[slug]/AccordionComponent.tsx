@@ -7,6 +7,7 @@ import AccordionSummary from "@mui/material/AccordionSummary"
 import AccordionDetails from "@mui/material/AccordionDetails"
 import Typography from "@mui/material/Typography"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
+import TableComponent from "./TableComponent"
 
 type AccordionComponentProps = {
   date: string
@@ -40,11 +41,7 @@ export default function AccordionComponent({
         {transcript.isLoading ? (
           <Typography variant="body2">Loading...</Typography>
         ) : transcript.data?.statements?.length ? (
-          transcript.data.statements.map((item, index) => (
-            <div key={index}>
-              <Typography variant="body2">Name: {item.name}</Typography>
-            </div>
-          ))
+          <TableComponent transcript={transcript} />
         ) : (
           <Typography variant="body2">No transcripts available.</Typography>
         )}

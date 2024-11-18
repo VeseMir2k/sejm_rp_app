@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import PaginationComponent from "../components/PaginationComponent"
 import { MP } from "../types/MPType"
 import SelectComponent from "../components/SelectComponent"
+import LoaderComponent from "../components/LoaderComponent"
 
 const itemsPerPage = 18
 
@@ -42,7 +43,7 @@ export default function MembersOfParliament() {
     setCurrentData(filtered.slice(0, itemsPerPage))
   }, [selectClub, MPsData])
 
-  if (isLoadingMPs) return <p>Ładowanie...</p>
+  if (isLoadingMPs) return <LoaderComponent />
 
   return (
     <Container>

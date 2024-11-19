@@ -36,8 +36,8 @@ export default function ProceedingTableComponent() {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Funkcja</TableCell>
-            <TableCell>Start</TableCell>
-            <TableCell>End</TableCell>
+            <TableCell>Początek</TableCell>
+            <TableCell>Koniec</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

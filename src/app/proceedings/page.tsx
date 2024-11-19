@@ -8,6 +8,11 @@ import Stack from "@mui/material/Stack"
 import { styled } from "@mui/material/styles"
 import { Button } from "@mui/material"
 
+import Accordion from "@mui/material/Accordion"
+import AccordionSummary from "@mui/material/AccordionSummary"
+import AccordionDetails from "@mui/material/AccordionDetails"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+
 const StyledLink = styled(Link)({
   textDecoration: "none",
 })
@@ -48,39 +53,49 @@ export default function Proceedings() {
   return (
     <>
       {ProceedingsData?.map((proceeding, index) => (
-        <div key={index}>
-          <h4 style={{ color: "white" }}>{proceeding.title}</h4>
-          <Stack
-            direction="row"
-            spacing={2}
-            useFlexGap
-            sx={{ flexWrap: "wrap" }}
-          >
-            {proceeding.dates.map((date) => {
-              const [color_1, color_2] = checkDate(date, currentDate())
-              return (
-                <Link
-                  key={date}
-                  href={`/proceedings/${proceeding.number}_${date}`}
-                >
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      color: color_1,
-                      borderColor: color_1,
-                      "&:hover": {
-                        borderColor: color_2,
-                        color: color_2,
-                      },
-                    }}
-                  >
-                    {date}
-                  </Button>
-                </Link>
-              )
-            })}
-          </Stack>
-        </div>
+        <>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              {proceeding.title}
+            </AccordionSummary>
+            <AccordionDetails>
+              <Stack
+                spacing={{ xs: 1, sm: 2 }}
+                direction="row"
+                useFlexGap
+                sx={{ flexWrap: "wrap" }}
+              >
+                {proceeding.dates.map((date) => {
+                  const [color_1, color_2] = checkDate(date, currentDate())
+                  return (
+                    <Link
+                      key={date}
+                      href={`/proceedings/${proceeding.number}_${date}`}
+                    >
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          color: color_1,
+                          borderColor: color_1,
+                          "&:hover": {
+                            borderColor: color_2,
+                            color: color_2,
+                          },
+                        }}
+                      >
+                        {date}
+                      </Button>
+                    </Link>
+                  )
+                })}
+              </Stack>
+            </AccordionDetails>
+          </Accordion>
+        </>
       ))}
     </>
   )

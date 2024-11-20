@@ -1,6 +1,5 @@
 import * as React from "react"
 import Typography from "@mui/material/Typography"
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import {
   Accordion,
   AccordionSummary,
@@ -8,6 +7,7 @@ import {
   Stack,
 } from "@mui/material"
 import LinkComponent from "./LinkComponent"
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 
 type AccordionComponentProps = {
   proceeding: {
@@ -21,33 +21,32 @@ export default function AccordionComponent({
   proceeding,
 }: AccordionComponentProps) {
   return (
-    <div>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ArrowDownwardIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ArrowDropDownIcon />}
+        aria-controls="panel2-content"
+        id="panel2-header"
+      >
+        <Typography>{proceeding.title}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Stack
+          spacing={{ xs: 1, sm: 2 }}
+          direction="row"
+          useFlexGap
+          sx={{ flexWrap: "wrap" }}
         >
-          <Typography>{proceeding.title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Stack
-            spacing={{ xs: 1, sm: 2 }}
-            direction="row"
-            useFlexGap
-            sx={{ flexWrap: "wrap" }}
-          >
-            {proceeding.dates.map((item) => {
-              return (
-                <LinkComponent
-                  date={item}
-                  proceedingNumber={proceeding.number}
-                />
-              )
-            })}
-          </Stack>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+          {proceeding.dates.map((item, index) => {
+            return (
+              <LinkComponent
+                key={`link_${index}`}
+                date={item}
+                proceedingNumber={proceeding.number}
+              />
+            )
+          })}
+        </Stack>
+      </AccordionDetails>
+    </Accordion>
   )
 }

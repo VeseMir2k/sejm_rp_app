@@ -18,8 +18,11 @@ export default function Proceedings() {
 
   return (
     <>
-      {ProceedingsData?.map((proceeding) => (
-        <AccordionComponent proceeding={proceeding} />
+      {ProceedingsData?.map((proceeding, index) => (
+        <AccordionComponent
+          key={index}
+          proceeding={proceeding}
+        />
       ))}
     </>
   )

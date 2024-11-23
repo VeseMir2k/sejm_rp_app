@@ -62,7 +62,7 @@ export default function MembersOfParliament() {
         {currentData.map((item) => (
           <Grid2
             key={item.id}
-            size={{ xs: 6, sm: 6, md: 3, lg: 2 }}
+            size={{ xs: 6, sm: 6, md: 4, lg: 2 }}
           >
             <MPCardComponent item={item} />
           </Grid2>

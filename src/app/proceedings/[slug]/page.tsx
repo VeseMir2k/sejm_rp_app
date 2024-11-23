@@ -6,12 +6,14 @@ import { useTranscriptsList } from "@/app/context/TranscriptsListContext"
 import { useAppBar } from "@/app/context/AppBarContext"
 
 import ProceedingTableComponent from "./ProceedingTableComponent"
+import LoaderComponent from "@/app/components/LoaderComponent"
 
 export default function Proceeding() {
   const params = useParams()
 
   const { changeTitleAppBar } = useAppBar()
-  const { TranscriptsListFetchData } = useTranscriptsList()
+  const { TranscriptsListFetchData, isLoadingTranscriptsList } =
+    useTranscriptsList()
 
   useEffect(() => {
     if (typeof params.slug === "string") {
@@ -22,6 +24,8 @@ export default function Proceeding() {
       console.log("Slug is not a string or is undefined:", params.slug)
     }
   }, [params.slug])
+
+  if (isLoadingTranscriptsList) return <LoaderComponent />
 
   return <ProceedingTableComponent />
 }

@@ -1,6 +1,6 @@
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
 import { MP } from "../types/MPType"
 
 import { Typography, CircularProgress, Box } from "@mui/material"

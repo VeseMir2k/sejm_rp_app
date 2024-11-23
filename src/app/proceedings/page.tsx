@@ -6,15 +6,19 @@ import { useProceedings } from "../context/ProceedingsContext"
 
 import { Typography, Stack, Box } from "@mui/material"
 import LinkComponent from "./LinkComponent"
+import LoaderComponent from "../components/LoaderComponent"
 
 export default function Proceedings() {
   const { changeTitleAppBar } = useAppBar()
-  const { ProceedingsFetchData, ProceedingsData } = useProceedings()
+  const { ProceedingsFetchData, ProceedingsData, isLoadingProceedings } =
+    useProceedings()
 
   useEffect(() => {
     ProceedingsFetchData()
     changeTitleAppBar("Obrady")
   }, [changeTitleAppBar, ProceedingsFetchData])
+
+  if (isLoadingProceedings) return <LoaderComponent />
 
   return (
     <>

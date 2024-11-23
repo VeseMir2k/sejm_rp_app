@@ -2,7 +2,6 @@ import MPsProvider from "./MPsContext"
 import AppBarProvider from "./AppBarContext"
 import ClubsProvider from "./ClubsContext"
 import ProceedingsProvider from "./ProceedingsContext"
-import ProceedingProvider from "./ProceedingContext"
 import TranscriptsListProvider from "./TranscriptsListContext"
 
 type AppProviderProps = {
@@ -14,11 +13,9 @@ export default function AppProvider({ children }: AppProviderProps) {
     <MPsProvider>
       <ClubsProvider>
         <ProceedingsProvider>
-          <ProceedingProvider>
-            <TranscriptsListProvider>
-              <AppBarProvider>{children}</AppBarProvider>
-            </TranscriptsListProvider>
-          </ProceedingProvider>
+          <TranscriptsListProvider>
+            <AppBarProvider>{children}</AppBarProvider>
+          </TranscriptsListProvider>
         </ProceedingsProvider>
       </ClubsProvider>
     </MPsProvider>

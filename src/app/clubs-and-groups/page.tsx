@@ -3,11 +3,11 @@ import { useAppBar } from "../context/AppBarContext"
 import { useEffect } from "react"
 
 export default function ClubsAndGroups() {
-  const { setTitle } = useAppBar()
+  const { changeTitleAppBar } = useAppBar()
 
   useEffect(() => {
-    setTitle("Kluby i koła")
-  }, [])
+    changeTitleAppBar("Kluby i koła")
+  }, [changeTitleAppBar])
 
   return <h2>Clubs and groups</h2>
 }

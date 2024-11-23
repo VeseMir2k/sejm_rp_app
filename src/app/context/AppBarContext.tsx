@@ -2,7 +2,7 @@ import React, { createContext, useContext, ReactNode } from "react"
 
 type AppBarType = {
   title: string
-  setTitle: (newTitle: string) => void
+  changeTitleAppBar: (title: string) => void
 }
 
 const AppBarContext = createContext<AppBarType | undefined>(undefined)
@@ -14,8 +14,12 @@ type AppBarProps = {
 export default function AppBarProvider({ children }: AppBarProps) {
   const [title, setTitle] = React.useState<string>("")
 
+  const changeTitleAppBar = (title: string) => {
+    setTitle(title)
+  }
+
   return (
-    <AppBarContext.Provider value={{ title, setTitle }}>
+    <AppBarContext.Provider value={{ title, changeTitleAppBar }}>
       {children}
     </AppBarContext.Provider>
   )

@@ -9,13 +9,13 @@ import ProceedingTableComponent from "./ProceedingTableComponent"
 export default function Proceeding() {
   const params = useParams()
 
-  const { setTitle } = useAppBar()
+  const { changeTitleAppBar } = useAppBar()
   const { TranscriptsListFetchData } = useTranscriptsList()
 
   useEffect(() => {
     if (typeof params.slug === "string") {
       const result = params.slug.trim().split("_")
-      setTitle(`Posiedzenie ${result[0]} dnia ${result[1]}`)
+      changeTitleAppBar(`Posiedzenie ${result[0]} dnia ${result[1]}`)
       TranscriptsListFetchData(result[0], result[1])
     } else {
       console.log("Slug is not a string or is undefined:", params.slug)

@@ -13,8 +13,8 @@ export default function LinkComponent({
   return (
     <Link href={`/proceedings/${proceedingNumber}_${date}`}>
       <Button
-        variant="contained"
-        color="secondary"
+        variant="outlined"
+        color="primary"
       >
         {date}
       </Button>

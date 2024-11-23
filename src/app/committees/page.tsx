@@ -3,11 +3,11 @@ import { useAppBar } from "../context/AppBarContext"
 import { useEffect } from "react"
 
 export default function Committees() {
-  const { setTitle } = useAppBar()
+  const { changeTitleAppBar } = useAppBar()
 
   useEffect(() => {
-    setTitle("Komisje")
-  }, [setTitle])
+    changeTitleAppBar("Komisje")
+  }, [changeTitleAppBar])
 
   return <h2>Committees</h2>
 }

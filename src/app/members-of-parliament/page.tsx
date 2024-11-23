@@ -17,7 +17,7 @@ const itemsPerPage = 18
 export default function MembersOfParliament() {
   const { MPsData, isLoadingMPs, MPsFetchData } = useMPs()
   const { clubsFetchData, clubsData } = useClubs()
-  const { setTitle } = useAppBar()
+  const { changeTitleAppBar } = useAppBar()
 
   const [currentData, setCurrentData] = useState<MP[]>([])
   const [filterData, setFilterData] = useState<MP[]>([])
@@ -30,8 +30,8 @@ export default function MembersOfParliament() {
   useEffect(() => {
     MPsFetchData()
     clubsFetchData()
-    setTitle("Posłowie")
-  }, [MPsFetchData, clubsFetchData, setTitle])
+    changeTitleAppBar("Posłowie")
+  }, [MPsFetchData, clubsFetchData, changeTitleAppBar])
 
   useEffect(() => {
     const filtered =

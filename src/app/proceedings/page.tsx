@@ -7,13 +7,13 @@ import LinkComponent from "./LinkComponent"
 import { Typography, Stack, Box } from "@mui/material"
 
 export default function Proceedings() {
-  const { setTitle } = useAppBar()
+  const { changeTitleAppBar } = useAppBar()
   const { ProceedingsFetchData, ProceedingsData } = useProceedings()
 
   useEffect(() => {
     ProceedingsFetchData()
-    setTitle("Obrady")
-  }, [setTitle, ProceedingsFetchData])
+    changeTitleAppBar("Obrady")
+  }, [changeTitleAppBar, ProceedingsFetchData])
 
   return (
     <>

@@ -18,7 +18,7 @@ export default function MPCardComponent({ item }: MPCardComponentProps) {
 
   return (
     <Link
-      href={`/`}
+      href={`/members-of-parliament/member-of-parliament?name=${item.firstLastName}&id=${item.id}`}
       passHref
     >
       <Box

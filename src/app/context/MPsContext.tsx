@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback } from "react"
 import { MP } from "../types/MPType"
-import { fetchMPs } from "../api/fetchMps"
+import { fetchMPs } from "../api/fetchMPs"
 
 export type MPsContextType = {
   MPsData: MP[] | null

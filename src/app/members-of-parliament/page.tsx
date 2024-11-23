@@ -13,7 +13,7 @@ import PaginationComponent from "../components/PaginationComponent"
 import SelectComponent from "./ClubSelectComponent"
 import LoaderComponent from "../components/LoaderComponent"
 
-const itemsPerPage = 18
+const itemsPerPage = 32
 
 export default function MembersOfParliament() {
   const { MPsData, isLoadingMPs, MPsFetchData } = useMPs()

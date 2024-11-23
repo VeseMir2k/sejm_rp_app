@@ -8,7 +8,7 @@ import LoaderComponent from "@/app/components/LoaderComponent"
 import { useSearchParams } from "next/navigation"
 
 export default function MemberOfParliament() {
-  const [MPData, setMPData] = useState<MP[] | null>(null)
+  const [MPData, setMPData] = useState<MP | null>(null)
   const [isLoadingMP, setIsLoadingMP] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -37,14 +37,17 @@ export default function MemberOfParliament() {
     }
   }, [])
 
-  console.log(MPData)
-
   if (isLoadingMP) return <LoaderComponent />
+
+  if (!MPData) {
+    return <div>Brak danych posła.</div>
+  }
+
+  const { firstLastName } = MPData
 
   return (
     <>
-      <h1>{MPData[0].firstLastName}</h1>
-      <h1>{nameParams}</h1>
+      <h1>{firstLastName}</h1>
     </>
   )
 }

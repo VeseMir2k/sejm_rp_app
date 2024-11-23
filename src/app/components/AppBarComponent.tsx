@@ -1,9 +1,7 @@
-import AppBar from "@mui/material/AppBar"
-import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
-import MenuIcon from "@mui/icons-material/Menu"
-import Toolbar from "@mui/material/Toolbar"
 import { useAppBar } from "../context/AppBarContext"
+
+import { AppBar, IconButton, Typography, Toolbar } from "@mui/material"
+import MenuIcon from "@mui/icons-material/Menu"
 
 type AppBarComponentProps = {
   isClosing: boolean

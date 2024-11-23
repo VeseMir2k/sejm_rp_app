@@ -1,13 +1,16 @@
 "use client"
 
-import Drawer from "@mui/material/Drawer"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import ListItemButton from "@mui/material/ListItemButton"
-import ListItemText from "@mui/material/ListItemText"
-import Toolbar from "@mui/material/Toolbar"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+} from "@mui/material"
 
 type DrawerComponentProps = {
   window?: () => Window

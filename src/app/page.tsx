@@ -1,13 +1,14 @@
 "use client"
-import { useAppBar } from "./context/AppBarContext"
+
 import { useEffect } from "react"
+import { useAppBar } from "./context/AppBarContext"
 
 export default function Home() {
-  const { setTitle } = useAppBar()
+  const { changeTitleAppBar } = useAppBar()
 
   useEffect(() => {
-    setTitle("Strona główna")
-  }, [])
+    changeTitleAppBar("Strona główna")
+  }, [changeTitleAppBar])
 
   return <h2>Home</h2>
 }

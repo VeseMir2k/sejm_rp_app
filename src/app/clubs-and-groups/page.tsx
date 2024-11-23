@@ -1,6 +1,7 @@
 "use client"
-import { useAppBar } from "../context/AppBarContext"
+
 import { useEffect } from "react"
+import { useAppBar } from "../context/AppBarContext"
 
 export default function ClubsAndGroups() {
   const { changeTitleAppBar } = useAppBar()

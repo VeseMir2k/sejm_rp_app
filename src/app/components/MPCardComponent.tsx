@@ -1,7 +1,8 @@
-import { Typography } from "@mui/material"
 import Link from "next/link"
 import Image from "next/image"
 import { MP } from "../types/MPType"
+
+import { Typography } from "@mui/material"
 
 export type MPCardComponentProps = {
   item: MP

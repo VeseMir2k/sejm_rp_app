@@ -1,10 +1,17 @@
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material"
-import { SelectChangeEvent } from "@mui/material"
+import { Club } from "../types/ClubType"
+
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+} from "@mui/material"
 
 type SelectComponentProps = {
   selectClub: string
   handleSelect: (event: SelectChangeEvent) => void
-  data: any[]
+  data: Club[] | null
 }
 
 export default function SelectComponent({
@@ -26,7 +33,7 @@ export default function SelectComponent({
         onChange={handleSelect}
       >
         <MenuItem value="All">All</MenuItem>
-        {data.map((item: any) => (
+        {data?.map((item) => (
           <MenuItem
             key={item.id}
             value={item.id}

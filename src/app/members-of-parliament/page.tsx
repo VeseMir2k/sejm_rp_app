@@ -1,15 +1,16 @@
 "use client"
 
-import { Grid2, Container } from "@mui/material"
-import { SelectChangeEvent } from "@mui/material/Select"
+import { useEffect, useState, useMemo } from "react"
+import { MP } from "../types/MPType"
 import { useMPs } from "../context/MPsContext"
 import { useClubs } from "../context/ClubsContext"
 import { useAppBar } from "../context/AppBarContext"
+
+import { Grid2, Container } from "@mui/material"
+import { SelectChangeEvent } from "@mui/material/Select"
 import MPCardComponent from "../components/MPCardComponent"
-import { useEffect, useState } from "react"
 import PaginationComponent from "../components/PaginationComponent"
-import { MP } from "../types/MPType"
-import SelectComponent from "../components/SelectComponent"
+import SelectComponent from "./ClubSelectComponent"
 import LoaderComponent from "../components/LoaderComponent"
 
 const itemsPerPage = 18
@@ -33,14 +34,15 @@ export default function MembersOfParliament() {
     changeTitleAppBar("Posłowie")
   }, [MPsFetchData, clubsFetchData, changeTitleAppBar])
 
-  useEffect(() => {
-    const filtered =
-      selectClub === "All"
-        ? MPsData || []
-        : MPsData?.filter((item) => item.club === selectClub) || []
+  const filteredData = useMemo(() => {
+    return selectClub === "All"
+      ? MPsData || []
+      : MPsData?.filter((item) => item.club === selectClub) || []
+  }, [MPsData, selectClub])
 
-    setFilterData(filtered)
-    setCurrentData(filtered.slice(0, itemsPerPage))
+  useEffect(() => {
+    setFilterData(filteredData)
+    setCurrentData(filteredData.slice(0, itemsPerPage))
   }, [selectClub, MPsData])
 
   if (isLoadingMPs) return <LoaderComponent />

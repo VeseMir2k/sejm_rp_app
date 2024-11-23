@@ -1,10 +1,11 @@
 "use client"
 
+import { useEffect } from "react"
 import { useAppBar } from "../context/AppBarContext"
 import { useProceedings } from "../context/ProceedingsContext"
-import { useEffect } from "react"
-import LinkComponent from "./LinkComponent"
+
 import { Typography, Stack, Box } from "@mui/material"
+import LinkComponent from "./LinkComponent"
 
 export default function Proceedings() {
   const { changeTitleAppBar } = useAppBar()

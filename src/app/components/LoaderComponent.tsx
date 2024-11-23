@@ -1,9 +1,8 @@
-import CircularProgress from "@mui/material/CircularProgress"
-import Box from "@mui/material/Box"
+import { Box, CircularProgress } from "@mui/material"
 
 export default function LoaderComponent() {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <CircularProgress />
     </Box>
   )

@@ -1,10 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { MP } from "../types/MPType"
+
 import { Stack, Pagination, PaginationItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-import { MP } from "../types/MPType"
 
 type PaginationComponentProps = {
   data: MP[]

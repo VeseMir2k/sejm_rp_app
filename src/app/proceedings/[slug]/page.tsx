@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { useParams } from "next/navigation"
 import { useTranscriptsList } from "@/app/context/TranscriptsListContext"
 import { useAppBar } from "@/app/context/AppBarContext"
+
 import ProceedingTableComponent from "./ProceedingTableComponent"
 
 export default function Proceeding() {

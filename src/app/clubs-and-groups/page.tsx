@@ -1,14 +1,14 @@
 "use client"
 
 import { useEffect } from "react"
-import { useAppBar } from "../context/appBar/AppBarContext"
+import { useTopAppBar } from "../context/topAppBar/TopAppBarContext"
 
 export default function Page() {
-  const { changeTitleAppBar } = useAppBar()
+  const { changeTitleTopAppBar } = useTopAppBar()
 
   useEffect(() => {
-    changeTitleAppBar("Kluby i koła")
-  }, [changeTitleAppBar])
+    changeTitleTopAppBar("Kluby i koła")
+  }, [changeTitleTopAppBar])
 
   return <h2>Clubs and groups</h2>
 }

@@ -3,10 +3,10 @@
 import { useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import { useTranscriptsList } from "@/app/context/transcriptsList/TranscriptsListContext"
-import { useAppBar } from "@/app/context/appBar/AppBarContext"
+import { useAppBar } from "@/app/context/topAppBar/TopAppBarContext"
 
 import ProceedingTableComponent from "./ProceedingTableComponent"
-import LoaderComponent from "@/app/components/LoaderComponent"
+import LoaderComponent from "@/app/components/loader/Loader"
 
 export default function Page() {
   const searchParams = useSearchParams()

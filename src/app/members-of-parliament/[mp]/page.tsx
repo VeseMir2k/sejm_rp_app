@@ -1,17 +1,17 @@
 "use client"
 
 import { useEffect, useState, useCallback } from "react"
-import { useAppBar } from "@/app/context/appBar/AppBarContext"
+import { useTopAppBar } from "@/app/context/topAppBar/TopAppBarContext"
 import { MemberOfParliament } from "../../types/MemberOfParliament.type"
 import { fetchMP } from "../../api/fetchMemberOfParliament"
-import LoaderComponent from "@/app/components/LoaderComponent"
+import LoaderComponent from "@/app/components/loader/Loader"
 import { useSearchParams } from "next/navigation"
 
 export default function Page() {
   const [MPData, setMPData] = useState<MemberOfParliament | null>(null)
   const [isLoadingMP, setIsLoadingMP] = useState<boolean>(true)
 
-  const { changeTitleAppBar } = useAppBar()
+  const { changeTitleTopAppBar } = useTopAppBar()
 
   const searchParams = useSearchParams()
 
@@ -31,9 +31,9 @@ export default function Page() {
   }, [])
 
   useEffect(() => {
-    changeTitleAppBar(nameParams as string)
+    changeTitleTopAppBar(nameParams as string)
     MPsFetchData(idParams as string)
-  }, [changeTitleAppBar, MPsFetchData, idParams, nameParams])
+  }, [changeTitleTopAppBar, MPsFetchData, idParams, nameParams])
 
   if (isLoadingMP) return <LoaderComponent />
 

@@ -1,5 +1,5 @@
 import MPsProvider from "./membersOfParliament/MembersOfParliamentContext"
-import AppBarProvider from "./appBar/AppBarContext"
+import AppBarProvider from "./topAppBar/TopAppBarContext"
 import ClubsProvider from "./clubs/ClubsContext"
 import ProceedingsProvider from "./proceedings/ProceedingsContext"
 import TranscriptsListProvider from "./transcriptsList/TranscriptsListContext"

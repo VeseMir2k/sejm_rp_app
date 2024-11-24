@@ -4,14 +4,14 @@ import { useEffect, useState, useMemo } from "react"
 import { MemberOfParliament } from "../types/MemberOfParliament.type"
 import { useMembersOfParliament } from "../context/membersOfParliament/MembersOfParliamentContext"
 import { useClubs } from "../context/clubs/ClubsContext"
-import { useAppBar } from "../context/appBar/AppBarContext"
+import { useTopAppBar } from "../context/topAppBar/TopAppBarContext"
 
 import { Grid2, Container } from "@mui/material"
 import { SelectChangeEvent } from "@mui/material/Select"
-import MPCardComponent from "../components/MemberOfParliamentCardComponent"
-import PaginationComponent from "../components/PaginationComponent"
+import MPCardComponent from "../components/memberOfParliamentCard/MemberOfParliamentCard"
+import PaginationComponent from "../components/dataPagination/DataPagination"
 import ClubSelectComponent from "./ClubSelectComponent"
-import LoaderComponent from "../components/LoaderComponent"
+import LoaderComponent from "../components/loader/Loader"
 
 const itemsPerPage = 32
 
@@ -22,7 +22,7 @@ export default function Page() {
     MembersOfParliamentFetchData,
   } = useMembersOfParliament()
   const { clubsFetchData, clubsData } = useClubs()
-  const { changeTitleAppBar } = useAppBar()
+  const { changeTitleTopAppBar } = useTopAppBar()
 
   const [currentData, setCurrentData] = useState<MemberOfParliament[]>([])
   const [filterData, setFilterData] = useState<MemberOfParliament[]>([])
@@ -35,8 +35,8 @@ export default function Page() {
   useEffect(() => {
     MembersOfParliamentFetchData()
     clubsFetchData()
-    changeTitleAppBar("Posłowie")
-  }, [MembersOfParliamentFetchData, clubsFetchData, changeTitleAppBar])
+    changeTitleTopAppBar("Posłowie")
+  }, [MembersOfParliamentFetchData, clubsFetchData, changeTitleTopAppBar])
 
   const filteredData = useMemo(() => {
     return selectClub === "All"

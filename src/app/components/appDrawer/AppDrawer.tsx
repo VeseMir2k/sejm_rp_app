@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { AppDrawerProps } from "./AppDrawer.type"
 
 import {
   Drawer,
@@ -12,21 +13,13 @@ import {
   Toolbar,
 } from "@mui/material"
 
-type DrawerComponentProps = {
-  window?: () => Window
-  setIsClosing: (isClosing: boolean) => void
-  setMobileOpen: (mobileOpen: boolean) => void
-  mobileOpen: boolean
-  drawerWidth: number
-}
-
-export default function DrawerComponent({
+export default function AppDrawer({
   window,
   setIsClosing,
   setMobileOpen,
   mobileOpen,
   drawerWidth,
-}: DrawerComponentProps) {
+}: AppDrawerProps) {
   const pathname = usePathname()
 
   const handleDrawerClose = () => {

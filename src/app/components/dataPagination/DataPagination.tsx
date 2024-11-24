@@ -1,23 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { MemberOfParliament } from "../types/MemberOfParliament.type"
-
+import { DataPaginationProps } from "./DataPagination.type"
 import { Stack, Pagination, PaginationItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
-type PaginationComponentProps = {
-  data: MemberOfParliament[]
-  itemsPerPage: number
-  setCurrentData: (data: MemberOfParliament[]) => void
-}
-
-export default function PaginationComponent({
+export default function DataPagination({
   data,
   itemsPerPage,
   setCurrentData,
-}: PaginationComponentProps) {
+}: DataPaginationProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(data.length / itemsPerPage)
 
@@ -29,7 +22,7 @@ export default function PaginationComponent({
   }, [setCurrentData, currentPage, data, startIdx, endIdx])
 
   const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page)

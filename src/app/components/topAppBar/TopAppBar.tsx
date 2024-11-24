@@ -1,22 +1,15 @@
-import { useAppBar } from "../context/appBar/AppBarContext"
-
+import { useTopAppBar } from "../../context/topAppBar/TopAppBarContext"
+import { TopAppBarProps } from "./TopAppBar.type"
 import { AppBar, IconButton, Typography, Toolbar } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 
-type AppBarComponentProps = {
-  isClosing: boolean
-  setMobileOpen: (mobileOpen: boolean) => void
-  mobileOpen: boolean
-  drawerWidth: number
-}
-
-export default function AppBarComponent({
+export default function TopAppBar({
   isClosing,
   setMobileOpen,
   mobileOpen,
   drawerWidth,
-}: AppBarComponentProps) {
-  const { title } = useAppBar()
+}: TopAppBarProps) {
+  const { title } = useTopAppBar()
 
   const handleDrawerToggle = () => {
     if (!isClosing) {

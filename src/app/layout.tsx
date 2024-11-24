@@ -5,8 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline"
 import Toolbar from "@mui/material/Toolbar"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { useState } from "react"
-import AppBarComponent from "./components/AppBarComponent"
-import DrawerComponent from "./components/DrawerComponent"
+import TopAppBar from "./components/topAppBar/TopAppBar"
+import AppDrawer from "./components/appDrawer/AppDrawer"
 import AppProvider from "./context"
 
 const darkTheme = createTheme({
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: Props) {
           <ThemeProvider theme={darkTheme}>
             <Box sx={{ display: "flex" }}>
               <CssBaseline />
-              <AppBarComponent
+              <TopAppBar
                 drawerWidth={drawerWidth}
                 isClosing={isClosing}
                 setMobileOpen={setMobileOpen}
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: Props) {
                 }}
                 aria-label="mailbox folders"
               >
-                <DrawerComponent
+                <AppDrawer
                   setIsClosing={setIsClosing}
                   setMobileOpen={setMobileOpen}
                   mobileOpen={mobileOpen}

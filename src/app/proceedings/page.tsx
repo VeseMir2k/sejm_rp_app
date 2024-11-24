@@ -1,22 +1,22 @@
 "use client"
 
 import { useEffect } from "react"
-import { useAppBar } from "../context/appBar/AppBarContext"
+import { useTopAppBar } from "../context/topAppBar/TopAppBarContext"
 import { useProceedings } from "../context/proceedings/ProceedingsContext"
 
 import { Typography, Stack, Box } from "@mui/material"
 import LinkComponent from "./LinkComponent"
-import LoaderComponent from "../components/LoaderComponent"
+import LoaderComponent from "../components/loader/Loader"
 
 export default function Page() {
-  const { changeTitleAppBar } = useAppBar()
+  const { changeTitleTopAppBar } = useTopAppBar()
   const { ProceedingsFetchData, ProceedingsData, isLoadingProceedings } =
     useProceedings()
 
   useEffect(() => {
     ProceedingsFetchData()
-    changeTitleAppBar("Obrady")
-  }, [changeTitleAppBar, ProceedingsFetchData])
+    changeTitleTopAppBar("Obrady")
+  }, [changeTitleTopAppBar, ProceedingsFetchData])
 
   if (isLoadingProceedings) return <LoaderComponent />
 

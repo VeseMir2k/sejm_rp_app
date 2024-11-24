@@ -1,20 +1,11 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { Club } from "../types/ClubType"
-import { fetchClubs } from "../api/fetchClubs"
-
-export type ClubsContextType = {
-  clubsData: Club[] | null
-  isLoadingClubs: boolean
-  clubsFetchData: () => void
-}
+import { Club } from "../../types/Club.type"
+import { fetchClubs } from "../../api/fetchClubs"
+import { ClubsContextType, ClubsPropsType } from "./ClubsContext.type"
 
 const ClubsContext = createContext<ClubsContextType | undefined>(undefined)
 
-type ClubsProps = {
-  children: React.ReactNode
-}
-
-export default function ClubsProvider({ children }: ClubsProps) {
+export default function ClubsProvider({ children }: ClubsPropsType) {
   const [clubsData, setClubsData] = useState<Club[]>([])
   const [isLoadingClubs, setIsLoadingClubs] = useState<boolean>(true)
 

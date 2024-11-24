@@ -1,27 +1,31 @@
 "use client"
 
 import { useEffect, useState, useMemo } from "react"
-import { MP } from "../types/MPType"
-import { useMPs } from "../context/MPsContext"
-import { useClubs } from "../context/ClubsContext"
-import { useAppBar } from "../context/AppBarContext"
+import { MemberOfParliament } from "../types/MemberOfParliament.type"
+import { useMembersOfParliament } from "../context/membersOfParliament/MembersOfParliamentContext"
+import { useClubs } from "../context/clubs/ClubsContext"
+import { useAppBar } from "../context/appBar/AppBarContext"
 
 import { Grid2, Container } from "@mui/material"
 import { SelectChangeEvent } from "@mui/material/Select"
-import MPCardComponent from "../components/MPCardComponent"
+import MPCardComponent from "../components/MemberOfParliamentCardComponent"
 import PaginationComponent from "../components/PaginationComponent"
-import SelectComponent from "./ClubSelectComponent"
+import ClubSelectComponent from "./ClubSelectComponent"
 import LoaderComponent from "../components/LoaderComponent"
 
 const itemsPerPage = 32
 
-export default function MembersOfParliament() {
-  const { MPsData, isLoadingMPs, MPsFetchData } = useMPs()
+export default function Page() {
+  const {
+    MembersOfParliamentData,
+    isLoadingMembersOfParliament,
+    MembersOfParliamentFetchData,
+  } = useMembersOfParliament()
   const { clubsFetchData, clubsData } = useClubs()
   const { changeTitleAppBar } = useAppBar()
 
-  const [currentData, setCurrentData] = useState<MP[]>([])
-  const [filterData, setFilterData] = useState<MP[]>([])
+  const [currentData, setCurrentData] = useState<MemberOfParliament[]>([])
+  const [filterData, setFilterData] = useState<MemberOfParliament[]>([])
   const [selectClub, setSelectClub] = useState("All")
 
   const handleSelect = (event: SelectChangeEvent) => {
@@ -29,27 +33,28 @@ export default function MembersOfParliament() {
   }
 
   useEffect(() => {
-    MPsFetchData()
+    MembersOfParliamentFetchData()
     clubsFetchData()
     changeTitleAppBar("Posłowie")
-  }, [MPsFetchData, clubsFetchData, changeTitleAppBar])
+  }, [MembersOfParliamentFetchData, clubsFetchData, changeTitleAppBar])
 
   const filteredData = useMemo(() => {
     return selectClub === "All"
-      ? MPsData || []
-      : MPsData?.filter((item) => item.club === selectClub) || []
-  }, [MPsData, selectClub])
+      ? MembersOfParliamentData || []
+      : MembersOfParliamentData?.filter((item) => item.club === selectClub) ||
+          []
+  }, [MembersOfParliamentData, selectClub])
 
   useEffect(() => {
     setFilterData(filteredData)
     setCurrentData(filteredData.slice(0, itemsPerPage))
-  }, [selectClub, MPsData])
+  }, [selectClub, MembersOfParliamentData, filteredData])
 
-  if (isLoadingMPs) return <LoaderComponent />
+  if (isLoadingMembersOfParliament || !clubsData) return <LoaderComponent />
 
   return (
     <Container>
-      <SelectComponent
+      <ClubSelectComponent
         handleSelect={handleSelect}
         selectClub={selectClub}
         data={clubsData}

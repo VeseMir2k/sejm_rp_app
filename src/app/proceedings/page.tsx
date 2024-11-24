@@ -1,14 +1,14 @@
 "use client"
 
 import { useEffect } from "react"
-import { useAppBar } from "../context/AppBarContext"
-import { useProceedings } from "../context/ProceedingsContext"
+import { useAppBar } from "../context/appBar/AppBarContext"
+import { useProceedings } from "../context/proceedings/ProceedingsContext"
 
 import { Typography, Stack, Box } from "@mui/material"
 import LinkComponent from "./LinkComponent"
 import LoaderComponent from "../components/LoaderComponent"
 
-export default function Proceedings() {
+export default function Page() {
   const { changeTitleAppBar } = useAppBar()
   const { ProceedingsFetchData, ProceedingsData, isLoadingProceedings } =
     useProceedings()

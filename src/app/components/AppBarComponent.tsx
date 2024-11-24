@@ -1,4 +1,4 @@
-import { useAppBar } from "../context/AppBarContext"
+import { useAppBar } from "../context/appBar/AppBarContext"
 
 import { AppBar, IconButton, Typography, Toolbar } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"

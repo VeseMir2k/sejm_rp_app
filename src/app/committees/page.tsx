@@ -1,9 +1,9 @@
 "use client"
 
 import { useEffect } from "react"
-import { useAppBar } from "../context/AppBarContext"
+import { useAppBar } from "../context/appBar/AppBarContext"
 
-export default function Committees() {
+export default function Page() {
   const { changeTitleAppBar } = useAppBar()
 
   useEffect(() => {

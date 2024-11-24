@@ -1,4 +1,4 @@
-import { Club } from "../types/ClubType"
+import { Club } from "../types/Club.type"
 
 import {
   FormControl,
@@ -14,7 +14,7 @@ type SelectComponentProps = {
   data: Club[] | null
 }
 
-export default function SelectComponent({
+export default function ClubSelectComponent({
   selectClub,
   handleSelect,
   data,

@@ -1,22 +1,18 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { Proceeding } from "../types/ProceedingType"
-import { fetchProceedings } from "../api/fetchProceedings"
-
-export type ProceedingsContextType = {
-  ProceedingsData: Proceeding[] | null
-  isLoadingProceedings: boolean
-  ProceedingsFetchData: () => void
-}
+import { Proceeding } from "../../types/Proceeding.type"
+import { fetchProceedings } from "../../api/fetchProceedings"
+import {
+  ProceedingsContextType,
+  ProceedingsPropsType,
+} from "./ProceedingsContext.type"
 
 const ProceedingsContext = createContext<ProceedingsContextType | undefined>(
   undefined
 )
 
-type ProceedingsProps = {
-  children: React.ReactNode
-}
-
-export default function ProceedingsProvider({ children }: ProceedingsProps) {
+export default function ProceedingsProvider({
+  children,
+}: ProceedingsPropsType) {
   const [ProceedingsData, setProceedingsData] = useState<Proceeding[]>([])
   const [isLoadingProceedings, setIsLoadingProceedings] =
     useState<boolean>(true)

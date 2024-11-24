@@ -1,16 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { MP } from "../types/MPType"
+import { MemberOfParliament } from "../types/MemberOfParliament.type"
 
 import { Stack, Pagination, PaginationItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
 type PaginationComponentProps = {
-  data: MP[]
+  data: MemberOfParliament[]
   itemsPerPage: number
-  setCurrentData: (data: MP[]) => void
+  setCurrentData: (data: MemberOfParliament[]) => void
 }
 
 export default function PaginationComponent({

@@ -1,15 +1,17 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { MP } from "../types/MPType"
+import { MemberOfParliament } from "../types/MemberOfParliament.type"
 
 import { Typography, CircularProgress, Box } from "@mui/material"
 
-export type MPCardComponentProps = {
-  item: MP
+export type MemberOfParliamentCardComponentProps = {
+  item: MemberOfParliament
 }
 
-export default function MPCardComponent({ item }: MPCardComponentProps) {
+export default function MemberOfParliamentCardComponent({
+  item,
+}: MemberOfParliamentCardComponentProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   const handleImageLoad = () => {

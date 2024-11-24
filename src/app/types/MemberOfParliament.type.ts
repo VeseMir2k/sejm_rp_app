@@ -1,5 +1,4 @@
-//! MP
-export type MP = {
+export type MemberOfParliament = {
   accusativeName: string
   active: boolean
   birthDate: string

@@ -1,24 +1,17 @@
 import { createContext, useContext, useState, useCallback } from "react"
-import { TranscriptsList } from "../types/TranscriptsListType"
-
-export type TranscriptsListContextType = {
-  TranscriptsListData: TranscriptsList | null
-
-  isLoadingTranscriptsList: boolean
-  TranscriptsListFetchData: (proceeding: string, date: string) => void
-}
+import { TranscriptsList } from "../../types/TranscriptsList.type"
+import {
+  TranscriptsListContextType,
+  TranscriptsListPropsType,
+} from "./TranscriptsListContext.type"
 
 const TranscriptsListContext = createContext<
   TranscriptsListContextType | undefined
 >(undefined)
 
-type TranscriptsListProps = {
-  children: React.ReactNode
-}
-
 export default function TranscriptsListProvider({
   children,
-}: TranscriptsListProps) {
+}: TranscriptsListPropsType) {
   const [TranscriptsListData, setTranscriptsListData] =
     useState<TranscriptsList | null>(null)
 

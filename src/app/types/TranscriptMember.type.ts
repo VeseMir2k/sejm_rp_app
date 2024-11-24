@@ -1,5 +1,4 @@
-//! TranscriptPerson
-export type TranscriptPerson = {
+export type TranscriptMember = {
   endDateTime: string
   function: string
   memberID: number

@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranscriptsList } from "@/app/context/TranscriptsListContext"
+import { useTranscriptsList } from "@/app/context/transcriptsList/TranscriptsListContext"
 
 import {
   Table,

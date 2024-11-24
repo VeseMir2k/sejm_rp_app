@@ -1,29 +1,27 @@
 "use client"
 
 import { useEffect } from "react"
-import { useParams } from "next/navigation"
-import { useTranscriptsList } from "@/app/context/TranscriptsListContext"
-import { useAppBar } from "@/app/context/AppBarContext"
+import { useSearchParams } from "next/navigation"
+import { useTranscriptsList } from "@/app/context/transcriptsList/TranscriptsListContext"
+import { useAppBar } from "@/app/context/appBar/AppBarContext"
 
 import ProceedingTableComponent from "./ProceedingTableComponent"
 import LoaderComponent from "@/app/components/LoaderComponent"
 
-export default function Proceeding() {
-  const params = useParams()
+export default function Page() {
+  const searchParams = useSearchParams()
 
   const { changeTitleAppBar } = useAppBar()
   const { TranscriptsListFetchData, isLoadingTranscriptsList } =
     useTranscriptsList()
 
+  const idParams = searchParams.get("id") || ""
+  const dateParams = searchParams.get("date") || ""
+
   useEffect(() => {
-    if (typeof params.slug === "string") {
-      const result = params.slug.trim().split("_")
-      changeTitleAppBar(`Posiedzenie ${result[0]} dnia ${result[1]}`)
-      TranscriptsListFetchData(result[0], result[1])
-    } else {
-      console.log("Slug is not a string or is undefined:", params.slug)
-    }
-  }, [params.slug])
+    changeTitleAppBar(`Posiedzenie ${idParams} dnia ${dateParams}`)
+    TranscriptsListFetchData(idParams, dateParams)
+  }, [TranscriptsListFetchData, changeTitleAppBar, idParams, dateParams])
 
   if (isLoadingTranscriptsList) return <LoaderComponent />
 

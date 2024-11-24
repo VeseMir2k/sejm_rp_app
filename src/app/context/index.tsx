@@ -1,8 +1,8 @@
-import MPsProvider from "./MPsContext"
-import AppBarProvider from "./AppBarContext"
-import ClubsProvider from "./ClubsContext"
-import ProceedingsProvider from "./ProceedingsContext"
-import TranscriptsListProvider from "./TranscriptsListContext"
+import MPsProvider from "./membersOfParliament/MembersOfParliamentContext"
+import AppBarProvider from "./appBar/AppBarContext"
+import ClubsProvider from "./clubs/ClubsContext"
+import ProceedingsProvider from "./proceedings/ProceedingsContext"
+import TranscriptsListProvider from "./transcriptsList/TranscriptsListContext"
 
 type AppProviderProps = {
   children: React.ReactNode

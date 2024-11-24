@@ -12,7 +12,7 @@ export default function LinkComponent({
   proceedingNumber,
 }: LinkComponentProps) {
   return (
-    <Link href={`/proceedings/${proceedingNumber}_${date}`}>
+    <Link href={`/proceedings/proceeding?id=${proceedingNumber}&date=${date}`}>
       <Button
         variant="outlined"
         color="primary"

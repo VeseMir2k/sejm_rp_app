@@ -7,7 +7,7 @@ import { getParliamentarian } from "../../api/getParliamentarian"
 import { TParliamentarian } from "../../types/Parliamentarian.type"
 import Loader from "@/app/components/Loader"
 
-export default function Page() {
+export default function ParliamentarianPage() {
   const [parliamentarian, setParliamentarian] =
     useState<TParliamentarian | null>(null)
   const [isLoadingParliamentarian, setIsLoadingParliamentarian] =

@@ -23,7 +23,7 @@ const styles = {
 
 const PARLIAMENTARIANS_PER_PAGE = 32
 
-export default function Page() {
+export default function ParliamentariansPage() {
   const {
     parliamentarians,
     isLoadingParliamentarians,

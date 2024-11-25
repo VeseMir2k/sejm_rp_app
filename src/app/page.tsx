@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useTopAppBar } from "./context/TopAppBar"
 
-export default function Home() {
+export default function HomePage() {
   const { changeTitle } = useTopAppBar()
 
   useEffect(() => {

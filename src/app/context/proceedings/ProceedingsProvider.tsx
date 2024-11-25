@@ -7,23 +7,23 @@ import { TProceeding } from "@/app/types/Proceeding.type"
 
 export const ProceedingsProvider = ({ children }: TProceedingsProps) => {
   const [proceedings, setProceedings] = useState<TProceeding[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoadingProceedings, setIsLoadingProceedings] = useState<boolean>(true)
 
   const handleGetProceedings = useCallback(async () => {
-    setIsLoading(true)
+    setIsLoadingProceedings(true)
     try {
       const data = await getProceedings()
       setProceedings(data)
     } catch (error) {
       console.log(error)
     } finally {
-      setIsLoading(false)
+      setIsLoadingProceedings(false)
     }
   }, [])
 
   return (
     <ProceedingsContext.Provider
-      value={{ proceedings, isLoading, handleGetProceedings }}
+      value={{ proceedings, isLoadingProceedings, handleGetProceedings }}
     >
       {children}
     </ProceedingsContext.Provider>

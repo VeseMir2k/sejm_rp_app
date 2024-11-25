@@ -8,7 +8,7 @@ import { useTopAppBar } from "@/app/context/TopAppBar"
 import ProceedingTable from "@/app/proceedings/components/ProceedingTable"
 import LoaderComponent from "@/app/components/Loader/Loader"
 
-export default function Page() {
+export default function ProceedingPage() {
   const searchParams = useSearchParams()
 
   const { changeTitle } = useTopAppBar()

@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { useTopAppBar } from "../context/TopAppBar"
 
-export default function Page() {
+export default function ParliamentaryGroupsPage() {
   const { changeTitle } = useTopAppBar()
 
   useEffect(() => {

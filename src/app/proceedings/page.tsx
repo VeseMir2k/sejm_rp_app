@@ -7,7 +7,7 @@ import { Typography, Stack, Box } from "@mui/material"
 import ProceedingLink from "./components/ProceedingLink"
 import Loader from "../components/Loader/Loader"
 
-export default function Page() {
+export default function ProceedingsPage() {
   const { changeTitle } = useTopAppBar()
   const { handleGetProceedings, proceedings, isLoadingProceedings } =
     useProceedings()

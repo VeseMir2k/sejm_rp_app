@@ -1,12 +1,12 @@
-import { MemberOfParliament } from "../../types/MemberOfParliament.type"
+import { TMemberOfParliament } from "../../types/MemberOfParliament.type"
 
-export type MembersOfParliamentPropsType = {
+export type TMembersOfParliamentProps = {
   children: React.ReactNode
 }
 
-export type MembersOfParliamentContextType = {
-  MembersOfParliamentData: MemberOfParliament[] | null
-  isLoadingMembersOfParliament: boolean
+export type TMembersOfParliamentContext = {
+  membersOfParliament: TMemberOfParliament[] | null
+  isLoading: boolean
   error: string | null
-  MembersOfParliamentFetchData: () => void
+  handleGetMembersOfParliament: () => void
 }

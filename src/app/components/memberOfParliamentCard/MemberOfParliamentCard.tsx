@@ -8,10 +8,7 @@ export default function MemberOfParliamentCard({
   item,
 }: MemberOfParliamentCardProps) {
   const [isLoading, setIsLoading] = useState(true)
-
-  const handleImageLoad = () => {
-    setIsLoading(false)
-  }
+  const [hasError, setHasError] = useState(false)
 
   return (
     <Link
@@ -27,7 +24,7 @@ export default function MemberOfParliamentCard({
         }}
       >
         <Box sx={{ width: "50px", height: "62px", position: "relative" }}>
-          {isLoading && (
+          {isLoading && !hasError && (
             <Box
               sx={{
                 position: "absolute",
@@ -52,7 +49,15 @@ export default function MemberOfParliamentCard({
               objectFit: "cover",
               visibility: isLoading ? "hidden" : "visible",
             }}
-            onLoad={handleImageLoad}
+            onLoad={() => {
+              setIsLoading(false)
+              setHasError(false)
+            }}
+            onError={() => {
+              setIsLoading(false)
+              setHasError(true)
+            }}
+            unoptimized={true}
           />
         </Box>
         <Typography

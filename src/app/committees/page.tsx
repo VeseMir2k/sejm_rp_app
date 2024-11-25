@@ -1,14 +1,14 @@
 "use client"
 
 import { useEffect } from "react"
-import { useTopAppBar } from "../context/topAppBar/TopAppBarContext"
+import { useTopAppBar } from "../context/TopAppBar"
 
 export default function Page() {
-  const { changeTitleTopAppBar } = useTopAppBar()
+  const { changeTitle } = useTopAppBar()
 
   useEffect(() => {
-    changeTitleTopAppBar("Komisje")
-  }, [changeTitleTopAppBar])
+    changeTitle("Komisje")
+  }, [changeTitle])
 
   return <h2>Committees</h2>
 }

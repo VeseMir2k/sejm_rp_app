@@ -1,4 +1,4 @@
-import { useTopAppBar } from "../../context/topAppBar/TopAppBarContext"
+import { useTopAppBar } from "../../context/TopAppBar"
 import { TopAppBarProps } from "./TopAppBar.type"
 import { AppBar, IconButton, Typography, Toolbar } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"

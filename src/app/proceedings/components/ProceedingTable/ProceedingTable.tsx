@@ -1,7 +1,6 @@
 "use client"
 
-import { useTranscriptsList } from "@/app/context/transcriptsList/TranscriptsListContext"
-
+import { useTranscripts } from "@/app/context/Transcripts"
 import {
   Table,
   TableBody,
@@ -12,8 +11,8 @@ import {
   Paper,
 } from "@mui/material"
 
-export default function ProceedingTableComponent() {
-  const { TranscriptsListData } = useTranscriptsList()
+export default function ProceedingTable() {
+  const { transcripts } = useTranscripts()
 
   const formatTime = (dateTime: string) => {
     if (dateTime) {
@@ -43,20 +42,20 @@ export default function ProceedingTableComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {TranscriptsListData?.statements.map((item) => (
+          {transcripts?.statements.map((statement) => (
             <TableRow
-              key={item.num}
+              key={statement.num}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
                 component="th"
                 scope="row"
               >
-                {item.name}
+                {statement.name}
               </TableCell>
-              <TableCell>{item.function}</TableCell>
-              <TableCell>{formatTime(item.startDateTime)}</TableCell>
-              <TableCell>{formatTime(item.endDateTime)}</TableCell>
+              <TableCell>{statement.function}</TableCell>
+              <TableCell>{formatTime(statement.startDateTime)}</TableCell>
+              <TableCell>{formatTime(statement.endDateTime)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

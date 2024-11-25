@@ -5,8 +5,8 @@ import CssBaseline from "@mui/material/CssBaseline"
 import Toolbar from "@mui/material/Toolbar"
 import { ThemeProvider, createTheme } from "@mui/material/styles"
 import { useState } from "react"
-import TopAppBar from "./components/topAppBar/TopAppBar"
-import AppDrawer from "./components/appDrawer/AppDrawer"
+import TopAppBar from "./components/TopAppBar/TopAppBar"
+import AppDrawer from "./components/AppDrawer/AppDrawer"
 import AppProvider from "./context"
 
 const darkTheme = createTheme({

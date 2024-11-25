@@ -1,11 +1,11 @@
-import { Proceeding } from "../../types/Proceeding.type"
+import { TProceeding } from "../../types/Proceeding.type"
 
-export type ProceedingsPropsType = {
+export type TProceedingsProps = {
   children: React.ReactNode
 }
 
-export type ProceedingsContextType = {
-  ProceedingsData: Proceeding[] | null
-  isLoadingProceedings: boolean
-  ProceedingsFetchData: () => void
+export type TProceedingsContext = {
+  proceedings: TProceeding[] | null
+  isLoading: boolean
+  handleGetProceedings: () => void
 }

@@ -1,5 +1,5 @@
-import { MemberOfParliament } from "../../types/MemberOfParliament.type"
+import { TMemberOfParliament } from "../../types/MemberOfParliament.type"
 
 export type MemberOfParliamentCardProps = {
-  item: MemberOfParliament
+  item: TMemberOfParliament
 }

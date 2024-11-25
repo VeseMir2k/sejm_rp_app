@@ -1,4 +1,4 @@
-export type MemberOfParliament = {
+export type TMemberOfParliament = {
   accusativeName: string
   active: boolean
   birthDate: string

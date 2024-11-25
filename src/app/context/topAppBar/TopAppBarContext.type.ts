@@ -1,7 +1,7 @@
-export type TopAppBarPropsType = {
+export type TTopAppBarProps = {
   children: React.ReactNode
 }
-export type TopAppBarContextType = {
+export type TTopAppBarContext = {
   title: string
-  changeTitleTopAppBar: (title: string) => void
+  changeTitle: (title: string) => void
 }

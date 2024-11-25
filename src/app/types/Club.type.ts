@@ -1,5 +1,4 @@
-//! Club
-export type Club = {
+export type TClub = {
   email: string
   fax: string
   id: string

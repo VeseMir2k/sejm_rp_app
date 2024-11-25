@@ -1,24 +1,11 @@
-import { Club } from "../types/Club.type"
+import { ClubSelectProps } from "./ClubSelect.type"
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material"
 
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-} from "@mui/material"
-
-type SelectComponentProps = {
-  selectClub: string
-  handleSelect: (event: SelectChangeEvent) => void
-  data: Club[] | null
-}
-
-export default function ClubSelectComponent({
+export default function ClubSelect({
   selectClub,
   handleSelect,
   data,
-}: SelectComponentProps) {
+}: ClubSelectProps) {
   return (
     <FormControl
       fullWidth

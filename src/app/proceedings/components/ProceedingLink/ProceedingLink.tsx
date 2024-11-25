@@ -1,16 +1,11 @@
 import Link from "next/link"
-
+import { ProceedingLinkProps } from "./ProceedingLink.type"
 import { Button } from "@mui/material"
 
-type LinkComponentProps = {
-  date: string
-  proceedingNumber: number
-}
-
-export default function LinkComponent({
+export default function ProceedingLink({
   date,
   proceedingNumber,
-}: LinkComponentProps) {
+}: ProceedingLinkProps) {
   return (
     <Link href={`/proceedings/proceeding?id=${proceedingNumber}&date=${date}`}>
       <Button

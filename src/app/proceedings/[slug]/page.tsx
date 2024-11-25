@@ -2,28 +2,27 @@
 
 import { useEffect } from "react"
 import { useSearchParams } from "next/navigation"
-import { useTranscriptsList } from "@/app/context/transcriptsList/TranscriptsListContext"
-import { useAppBar } from "@/app/context/topAppBar/TopAppBarContext"
+import { useTranscripts } from "@/app/context/Transcripts"
+import { useTopAppBar } from "@/app/context/TopAppBar"
 
-import ProceedingTableComponent from "./ProceedingTableComponent"
-import LoaderComponent from "@/app/components/loader/Loader"
+import ProceedingTable from "@/app/proceedings/components/ProceedingTable"
+import LoaderComponent from "@/app/components/Loader/Loader"
 
 export default function Page() {
   const searchParams = useSearchParams()
 
-  const { changeTitleAppBar } = useAppBar()
-  const { TranscriptsListFetchData, isLoadingTranscriptsList } =
-    useTranscriptsList()
+  const { changeTitle } = useTopAppBar()
+  const { handleGetTranscripts, isLoading } = useTranscripts()
 
   const idParams = searchParams.get("id") || ""
   const dateParams = searchParams.get("date") || ""
 
   useEffect(() => {
-    changeTitleAppBar(`Posiedzenie ${idParams} dnia ${dateParams}`)
-    TranscriptsListFetchData(idParams, dateParams)
-  }, [TranscriptsListFetchData, changeTitleAppBar, idParams, dateParams])
+    changeTitle(`Posiedzenie ${idParams} dnia ${dateParams}`)
+    handleGetTranscripts(idParams, dateParams)
+  }, [handleGetTranscripts, changeTitle, idParams, dateParams])
 
-  if (isLoadingTranscriptsList) return <LoaderComponent />
+  if (isLoading) return <LoaderComponent />
 
-  return <ProceedingTableComponent />
+  return <ProceedingTable />
 }

@@ -1,23 +1,22 @@
-import MPsProvider from "./membersOfParliament/MembersOfParliamentContext"
-import AppBarProvider from "./topAppBar/TopAppBarContext"
-import ClubsProvider from "./clubs/ClubsContext"
-import ProceedingsProvider from "./proceedings/ProceedingsContext"
-import TranscriptsListProvider from "./transcriptsList/TranscriptsListContext"
-
+import { MembersOfParliamentProvider } from "./MembersOfParliament"
+import { TopAppBarProvider } from "./TopAppBar"
+import { ProceedingsProvider } from "./Proceedings"
+import { TranscriptsProvider } from "./Transcripts"
+import { ClubsProvider } from "./ClubsContext"
 type AppProviderProps = {
   children: React.ReactNode
 }
 
 export default function AppProvider({ children }: AppProviderProps) {
   return (
-    <MPsProvider>
+    <MembersOfParliamentProvider>
       <ClubsProvider>
         <ProceedingsProvider>
-          <TranscriptsListProvider>
-            <AppBarProvider>{children}</AppBarProvider>
-          </TranscriptsListProvider>
+          <TranscriptsProvider>
+            <TopAppBarProvider>{children}</TopAppBarProvider>
+          </TranscriptsProvider>
         </ProceedingsProvider>
       </ClubsProvider>
-    </MPsProvider>
+    </MembersOfParliamentProvider>
   )
 }

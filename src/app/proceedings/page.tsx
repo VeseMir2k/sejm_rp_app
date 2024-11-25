@@ -1,28 +1,26 @@
 "use client"
 
 import { useEffect } from "react"
-import { useTopAppBar } from "../context/topAppBar/TopAppBarContext"
-import { useProceedings } from "../context/proceedings/ProceedingsContext"
-
+import { useTopAppBar } from "../context/TopAppBar"
+import { useProceedings } from "../context/Proceedings"
 import { Typography, Stack, Box } from "@mui/material"
-import LinkComponent from "./LinkComponent"
-import LoaderComponent from "../components/loader/Loader"
+import ProceedingLink from "./components/ProceedingLink"
+import Loader from "../components/Loader/Loader"
 
 export default function Page() {
-  const { changeTitleTopAppBar } = useTopAppBar()
-  const { ProceedingsFetchData, ProceedingsData, isLoadingProceedings } =
-    useProceedings()
+  const { changeTitle } = useTopAppBar()
+  const { handleGetProceedings, proceedings, isLoading } = useProceedings()
 
   useEffect(() => {
-    ProceedingsFetchData()
-    changeTitleTopAppBar("Obrady")
-  }, [changeTitleTopAppBar, ProceedingsFetchData])
+    handleGetProceedings()
+    changeTitle("Obrady")
+  }, [changeTitle, handleGetProceedings])
 
-  if (isLoadingProceedings) return <LoaderComponent />
+  if (isLoading) return <Loader />
 
   return (
     <>
-      {ProceedingsData?.map((proceeding) => (
+      {proceedings?.map((proceeding) => (
         <Box
           key={proceeding.title}
           component="section"
@@ -39,9 +37,9 @@ export default function Page() {
             useFlexGap
             sx={{ flexWrap: "wrap" }}
           >
-            {proceeding.dates.map((item, index) => {
+            {proceeding.dates.map((item: string, index: number) => {
               return (
-                <LinkComponent
+                <ProceedingLink
                   key={`link_${index}`}
                   date={item}
                   proceedingNumber={proceeding.number}

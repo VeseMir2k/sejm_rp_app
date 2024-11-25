@@ -1,31 +1,27 @@
 "use client"
 
 import { useEffect, useState, useMemo } from "react"
-import { MemberOfParliament } from "../types/MemberOfParliament.type"
-import { useMembersOfParliament } from "../context/membersOfParliament/MembersOfParliamentContext"
-import { useClubs } from "../context/clubs/ClubsContext"
-import { useTopAppBar } from "../context/topAppBar/TopAppBarContext"
-
+import { TMemberOfParliament } from "../types/MemberOfParliament.type"
+import { useMembersOfParliament } from "../context/MembersOfParliament"
+import { useTopAppBar } from "../context/TopAppBar"
+import { useClubs } from "../context/ClubsContext"
 import { Grid2, Container } from "@mui/material"
 import { SelectChangeEvent } from "@mui/material/Select"
-import MPCardComponent from "../components/memberOfParliamentCard/MemberOfParliamentCard"
-import PaginationComponent from "../components/dataPagination/DataPagination"
-import ClubSelectComponent from "./ClubSelectComponent"
-import LoaderComponent from "../components/loader/Loader"
+import MPCardComponent from "../components/MemberOfParliamentCard/MemberOfParliamentCard"
+import PaginationComponent from "../components/DataPagination/DataPagination"
+import ClubSelect from "./components/ClubSelect"
+import Loader from "../components/Loader"
 
 const itemsPerPage = 32
 
 export default function Page() {
-  const {
-    MembersOfParliamentData,
-    isLoadingMembersOfParliament,
-    MembersOfParliamentFetchData,
-  } = useMembersOfParliament()
-  const { clubsFetchData, clubsData } = useClubs()
-  const { changeTitleTopAppBar } = useTopAppBar()
+  const { membersOfParliament, isLoading, handleGetMembersOfParliament } =
+    useMembersOfParliament()
+  const { handleGetClubs, clubs } = useClubs()
+  const { changeTitle } = useTopAppBar()
 
-  const [currentData, setCurrentData] = useState<MemberOfParliament[]>([])
-  const [filterData, setFilterData] = useState<MemberOfParliament[]>([])
+  const [currentData, setCurrentData] = useState<TMemberOfParliament[]>([])
+  const [filterData, setFilterData] = useState<TMemberOfParliament[]>([])
   const [selectClub, setSelectClub] = useState("All")
 
   const handleSelect = (event: SelectChangeEvent) => {
@@ -33,31 +29,30 @@ export default function Page() {
   }
 
   useEffect(() => {
-    MembersOfParliamentFetchData()
-    clubsFetchData()
-    changeTitleTopAppBar("Posłowie")
-  }, [MembersOfParliamentFetchData, clubsFetchData, changeTitleTopAppBar])
+    handleGetMembersOfParliament()
+    handleGetClubs()
+    changeTitle("Posłowie")
+  }, [handleGetMembersOfParliament, handleGetClubs, changeTitle])
 
   const filteredData = useMemo(() => {
     return selectClub === "All"
-      ? MembersOfParliamentData || []
-      : MembersOfParliamentData?.filter((item) => item.club === selectClub) ||
-          []
-  }, [MembersOfParliamentData, selectClub])
+      ? membersOfParliament || []
+      : membersOfParliament?.filter((item) => item.club === selectClub) || []
+  }, [membersOfParliament, selectClub])
 
   useEffect(() => {
     setFilterData(filteredData)
     setCurrentData(filteredData.slice(0, itemsPerPage))
-  }, [selectClub, MembersOfParliamentData, filteredData])
+  }, [selectClub, membersOfParliament, filteredData])
 
-  if (isLoadingMembersOfParliament || !clubsData) return <LoaderComponent />
+  if (isLoading || !clubs) return <Loader />
 
   return (
     <Container>
-      <ClubSelectComponent
+      <ClubSelect
         handleSelect={handleSelect}
         selectClub={selectClub}
-        data={clubsData}
+        data={clubs}
       />
 
       <Grid2

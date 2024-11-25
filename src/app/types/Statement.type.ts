@@ -1,4 +1,4 @@
-export type TranscriptMember = {
+export type TStatement = {
   endDateTime: string
   function: string
   memberID: number

@@ -9,7 +9,7 @@ export default function ClubSelect({
   return (
     <FormControl
       fullWidth
-      sx={{ m: 1, width: 220 }}
+      sx={{ width: 220 }}
       size="small"
     >
       <InputLabel id="select-label">Partia</InputLabel>

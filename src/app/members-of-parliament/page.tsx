@@ -12,6 +12,14 @@ import PaginationComponent from "../components/DataPagination/DataPagination"
 import ClubSelect from "./components/ClubSelect"
 import Loader from "../components/Loader"
 
+const styles = {
+  formWrapper: {
+    display: "flex",
+    justifyContent: "flex-end",
+    mb: 2,
+  },
+} as const
+
 const itemsPerPage = 32
 
 export default function Page() {
@@ -28,17 +36,17 @@ export default function Page() {
     setSelectClub(event.target.value as string)
   }
 
-  useEffect(() => {
-    handleGetMembersOfParliament()
-    handleGetClubs()
-    changeTitle("Posłowie")
-  }, [handleGetMembersOfParliament, handleGetClubs, changeTitle])
-
   const filteredData = useMemo(() => {
     return selectClub === "All"
       ? membersOfParliament || []
       : membersOfParliament?.filter((item) => item.club === selectClub) || []
   }, [membersOfParliament, selectClub])
+
+  useEffect(() => {
+    handleGetMembersOfParliament()
+    handleGetClubs()
+    changeTitle("Posłowie")
+  }, [handleGetMembersOfParliament, handleGetClubs, changeTitle])
 
   useEffect(() => {
     setFilterData(filteredData)
@@ -49,7 +57,7 @@ export default function Page() {
 
   return (
     <Container>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={styles.formWrapper}>
         <ClubSelect
           handleSelect={handleSelect}
           selectClub={selectClub}

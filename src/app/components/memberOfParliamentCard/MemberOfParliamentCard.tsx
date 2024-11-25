@@ -4,8 +4,59 @@ import Image from "next/image"
 import { Typography, CircularProgress, Box } from "@mui/material"
 import { MemberOfParliamentCardProps } from "./MemberOfParliamentCard.type"
 
+const styles = {
+  link: {
+    display: "block",
+    textDecoration: "none",
+    height: "100%",
+  },
+  card: {
+    cursor: "pointer",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#222",
+    borderRadius: "10px",
+    boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.5)",
+    overflow: "hidden",
+    transition: "transform 0.3s ease-in-out",
+    "&:hover": {
+      transform: "scale(1.05)",
+      "& .image-card": {
+        transform: "scale(1.05)",
+      },
+    },
+  },
+  imageWrapper: {
+    position: "relative",
+  },
+  loader: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    transition: "transform 0.3s ease-in-out",
+  },
+  text: {
+    width: "100%",
+    color: "white",
+    padding: "8px",
+    display: "flex",
+    flexDirection: "column",
+  },
+} as const
+
 export default function MemberOfParliamentCard({
   item,
+  selectedClub,
 }: MemberOfParliamentCardProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -13,28 +64,12 @@ export default function MemberOfParliamentCard({
   return (
     <Link
       href={`/members-of-parliament/member-of-parliament?name=${item.firstLastName}&id=${item.id}`}
-      passHref
+      style={styles.link}
     >
-      <Box
-        sx={{
-          display: "flex",
-          width: "100%",
-          cursor: "pointer",
-          backgroundColor: "#333",
-        }}
-      >
-        <Box sx={{ width: "50px", height: "62px", position: "relative" }}>
+      <Box sx={styles.card}>
+        <Box sx={styles.imageWrapper}>
           {isLoading && !hasError && (
-            <Box
-              sx={{
-                position: "absolute",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "50px",
-                height: "62px",
-              }}
-            >
+            <Box sx={styles.loader}>
               <CircularProgress size={24} />
             </Box>
           )}
@@ -45,8 +80,9 @@ export default function MemberOfParliamentCard({
             loading="lazy"
             width={50}
             height={62}
+            className="image-card"
             style={{
-              objectFit: "cover",
+              ...styles.image,
               visibility: isLoading ? "hidden" : "visible",
             }}
             onLoad={() => {
@@ -62,13 +98,11 @@ export default function MemberOfParliamentCard({
         </Box>
         <Typography
           variant="caption"
-          sx={{
-            width: "100%",
-            color: "white",
-            padding: "8px",
-          }}
+          textAlign="center"
+          sx={styles.text}
         >
-          {item.firstLastName}
+          <span>{item.firstLastName}</span>
+          <span>{selectedClub === "All" && `(${item.club})`}</span>
         </Typography>
       </Box>
     </Link>

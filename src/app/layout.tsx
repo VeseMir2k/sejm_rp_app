@@ -9,9 +9,18 @@ import TopAppBar from "./components/TopAppBar/TopAppBar"
 import AppDrawer from "./components/AppDrawer/AppDrawer"
 import AppProvider from "./context"
 
-const darkTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: "dark",
+  },
+  breakpoints: {
+    values: {
+      xs: 640,
+      sm: 768,
+      md: 1024,
+      lg: 1280,
+      xl: 1536,
+    },
   },
 })
 
@@ -29,7 +38,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body>
         <AppProvider>
-          <ThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={theme}>
             <Box sx={{ display: "flex" }}>
               <CssBaseline />
               <TopAppBar

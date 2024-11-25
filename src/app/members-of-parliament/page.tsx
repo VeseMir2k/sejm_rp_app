@@ -5,9 +5,9 @@ import { TMemberOfParliament } from "../types/MemberOfParliament.type"
 import { useMembersOfParliament } from "../context/MembersOfParliament"
 import { useTopAppBar } from "../context/TopAppBar"
 import { useClubs } from "../context/ClubsContext"
-import { Grid2, Container } from "@mui/material"
+import { Grid2, Container, Box } from "@mui/material"
 import { SelectChangeEvent } from "@mui/material/Select"
-import MPCardComponent from "../components/MemberOfParliamentCard/MemberOfParliamentCard"
+import MemberOfParliamentCard from "../components/MemberOfParliamentCard/MemberOfParliamentCard"
 import PaginationComponent from "../components/DataPagination/DataPagination"
 import ClubSelect from "./components/ClubSelect"
 import Loader from "../components/Loader"
@@ -49,22 +49,28 @@ export default function Page() {
 
   return (
     <Container>
-      <ClubSelect
-        handleSelect={handleSelect}
-        selectClub={selectClub}
-        data={clubs}
-      />
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <ClubSelect
+          handleSelect={handleSelect}
+          selectClub={selectClub}
+          data={clubs}
+        />
+      </Box>
 
       <Grid2
         container
         spacing={4}
+        columns={{ xs: 12, sm: 12, md: 18, lg: 18 }}
       >
         {currentData.map((item) => (
           <Grid2
             key={item.id}
-            size={{ xs: 6, sm: 6, md: 4, lg: 2 }}
+            size={{ xs: 4, sm: 4, md: 3, lg: 2 }}
           >
-            <MPCardComponent item={item} />
+            <MemberOfParliamentCard
+              selectedClub={selectClub}
+              item={item}
+            />
           </Grid2>
         ))}
       </Grid2>

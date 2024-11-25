@@ -12,15 +12,15 @@ export default function ClubSelect({
       sx={{ width: 220 }}
       size="small"
     >
-      <InputLabel id="select-label">Partia</InputLabel>
+      <InputLabel id="select-club-label">Partia</InputLabel>
       <Select
-        labelId="select-label"
-        id="demo-simple-select"
+        labelId="select-club-label"
+        id="select-club"
         value={selectClub}
-        label="Age"
+        label="Partia"
         onChange={handleSelect}
       >
-        <MenuItem value="All">All</MenuItem>
+        <MenuItem value="All">Wszystkie</MenuItem>
         {data?.map((item) => (
           <MenuItem
             key={item.id}

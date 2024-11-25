@@ -3,6 +3,7 @@ import { TopAppBarProvider } from "./TopAppBar"
 import { ProceedingsProvider } from "./Proceedings"
 import { TranscriptsProvider } from "./Transcripts"
 import { ClubsProvider } from "./ClubsContext"
+
 type AppProviderProps = {
   children: React.ReactNode
 }

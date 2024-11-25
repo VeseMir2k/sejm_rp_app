@@ -10,8 +10,7 @@ import Loader from "@/app/components/Loader"
 export default function Page() {
   const [memberOfParliament, setMemberOfParliament] =
     useState<TMemberOfParliament | null>(null)
-  const [isLoadingMemberOfParliament, setIsLoadingMemberOfParliament] =
-    useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const { changeTitle } = useTopAppBar()
 
@@ -21,14 +20,14 @@ export default function Page() {
   const idParams = searchParams.get("id")
 
   const handleGetMemberOfParliament = useCallback(async (id: string) => {
-    setIsLoadingMemberOfParliament(true)
+    setIsLoading(true)
     try {
       const data = await getMemberOfParliament(id)
       setMemberOfParliament(data)
     } catch (error) {
       console.error(`Błąd pobierania danych: ${error}`)
     } finally {
-      setIsLoadingMemberOfParliament(false)
+      setIsLoading(false)
     }
   }, [])
 
@@ -37,7 +36,7 @@ export default function Page() {
     handleGetMemberOfParliament(idParams as string)
   }, [changeTitle, handleGetMemberOfParliament, idParams, nameParams])
 
-  if (isLoadingMemberOfParliament) return <Loader />
+  if (isLoading) return <Loader />
 
   if (!memberOfParliament) {
     return <div>Brak danych posła.</div>

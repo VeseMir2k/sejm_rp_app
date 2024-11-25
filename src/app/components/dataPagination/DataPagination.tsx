@@ -6,6 +6,13 @@ import { Stack, Pagination, PaginationItem } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 
+const styles = {
+  pagination: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+}
+
 export default function DataPagination({
   data,
   itemsPerPage,
@@ -33,10 +40,7 @@ export default function DataPagination({
       mt={2}
       direction="row"
       spacing={2}
-      sx={{
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      sx={styles.pagination}
     >
       <Pagination
         count={totalPages}

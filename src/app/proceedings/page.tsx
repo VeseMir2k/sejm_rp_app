@@ -9,14 +9,15 @@ import Loader from "../components/Loader/Loader"
 
 export default function Page() {
   const { changeTitle } = useTopAppBar()
-  const { handleGetProceedings, proceedings, isLoading } = useProceedings()
+  const { handleGetProceedings, proceedings, isLoadingProceedings } =
+    useProceedings()
 
   useEffect(() => {
     handleGetProceedings()
     changeTitle("Obrady")
   }, [changeTitle, handleGetProceedings])
 
-  if (isLoading) return <Loader />
+  if (isLoadingProceedings) return <Loader />
 
   return (
     <>

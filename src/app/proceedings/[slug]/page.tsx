@@ -12,7 +12,7 @@ export default function Page() {
   const searchParams = useSearchParams()
 
   const { changeTitle } = useTopAppBar()
-  const { handleGetTranscripts, isLoading } = useTranscripts()
+  const { handleGetTranscripts, isLoadingTranscripts } = useTranscripts()
 
   const idParams = searchParams.get("id") || ""
   const dateParams = searchParams.get("date") || ""
@@ -22,7 +22,7 @@ export default function Page() {
     handleGetTranscripts(idParams, dateParams)
   }, [handleGetTranscripts, changeTitle, idParams, dateParams])
 
-  if (isLoading) return <LoaderComponent />
+  if (isLoadingTranscripts) return <LoaderComponent />
 
   return <ProceedingTable />
 }

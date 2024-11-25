@@ -3,13 +3,13 @@
 import { useEffect, useState, useCallback } from "react"
 import { useSearchParams } from "next/navigation"
 import { useTopAppBar } from "@/app/context/TopAppBar"
-import { getMemberOfParliament } from "../../api/getMemberOfParliament"
-import { TMemberOfParliament } from "../../types/MemberOfParliament.type"
+import { getParliamentarian } from "../../api/getParliamentarian"
+import { TParliamentarian } from "../../types/Parliamentarian.type"
 import Loader from "@/app/components/Loader"
 
 export default function Page() {
   const [memberOfParliament, setMemberOfParliament] =
-    useState<TMemberOfParliament | null>(null)
+    useState<TParliamentarian | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const { changeTitle } = useTopAppBar()
@@ -22,7 +22,7 @@ export default function Page() {
   const handleGetMemberOfParliament = useCallback(async (id: string) => {
     setIsLoading(true)
     try {
-      const data = await getMemberOfParliament(id)
+      const data = await getParliamentarian(id)
       setMemberOfParliament(data)
     } catch (error) {
       console.error(`Błąd pobierania danych: ${error}`)

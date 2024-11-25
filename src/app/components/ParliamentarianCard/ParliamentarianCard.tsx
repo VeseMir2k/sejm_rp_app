@@ -2,7 +2,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Typography, CircularProgress, Box } from "@mui/material"
-import { MemberOfParliamentCardProps } from "./MemberOfParliamentCard.type"
+import { ParliamentarianCardProps } from "./ParliamentarianCard.type"
 
 const styles = {
   link: {
@@ -54,16 +54,16 @@ const styles = {
   },
 } as const
 
-export default function MemberOfParliamentCard({
+export default function ParliamentarianCard({
   item,
   selectedClub,
-}: MemberOfParliamentCardProps) {
+}: ParliamentarianCardProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
   return (
     <Link
-      href={`/members-of-parliament/member-of-parliament?name=${item.firstLastName}&id=${item.id}`}
+      href={`/parliamentarians/parliamentarian?name=${item.firstLastName}&id=${item.id}`}
       style={styles.link}
     >
       <Box sx={styles.card}>

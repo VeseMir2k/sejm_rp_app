@@ -1,8 +1,8 @@
 import { SelectChangeEvent } from "@mui/material"
-import { TClub } from "@/app/types/Club.type"
+import { TParliamentaryGroup } from "@/app/types/ParliamentaryGroup.type"
 
 export type ClubSelectProps = {
   selectClub: string
   handleSelect: (event: SelectChangeEvent) => void
-  data: TClub[] | null
+  data: TParliamentaryGroup[] | null
 }

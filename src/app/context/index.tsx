@@ -1,8 +1,8 @@
-import { MembersOfParliamentProvider } from "./MembersOfParliament"
+import { ParliamentariansProvider } from "./Parliamentarians"
 import { TopAppBarProvider } from "./TopAppBar"
 import { ProceedingsProvider } from "./Proceedings"
 import { TranscriptsProvider } from "./Transcripts"
-import { ClubsProvider } from "./ClubsContext"
+import { ParliamentaryGroupsProvider } from "./ParliamentaryGroupsContext"
 
 type AppProviderProps = {
   children: React.ReactNode
@@ -10,14 +10,14 @@ type AppProviderProps = {
 
 export default function AppProvider({ children }: AppProviderProps) {
   return (
-    <MembersOfParliamentProvider>
-      <ClubsProvider>
+    <ParliamentariansProvider>
+      <ParliamentaryGroupsProvider>
         <ProceedingsProvider>
           <TranscriptsProvider>
             <TopAppBarProvider>{children}</TopAppBarProvider>
           </TranscriptsProvider>
         </ProceedingsProvider>
-      </ClubsProvider>
-    </MembersOfParliamentProvider>
+      </ParliamentaryGroupsProvider>
+    </ParliamentariansProvider>
   )
 }

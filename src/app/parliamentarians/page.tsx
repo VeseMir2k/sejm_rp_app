@@ -1,16 +1,17 @@
 "use client"
 
 import { useEffect, useState, useMemo } from "react"
-import { TMemberOfParliament } from "../types/MemberOfParliament.type"
-import { useMembersOfParliament } from "../context/MembersOfParliament"
+import { TParliamentarian } from "../types/Parliamentarian.type"
+import { useParliamentarians } from "../context/Parliamentarians"
 import { useTopAppBar } from "../context/TopAppBar"
-import { useClubs } from "../context/ClubsContext"
+import { useParliamentaryGroups } from "../context/ParliamentaryGroupsContext"
 import { Grid2, Container, Box } from "@mui/material"
 import { SelectChangeEvent } from "@mui/material/Select"
-import MemberOfParliamentCard from "../components/MemberOfParliamentCard/MemberOfParliamentCard"
+import ParliamentarianCard from "../components/ParliamentarianCard"
 import PaginationComponent from "../components/DataPagination/DataPagination"
 import ClubSelect from "./components/ClubSelect"
 import Loader from "../components/Loader"
+import SearchInput from "./components/SearchInput"
 
 const styles = {
   formWrapper: {
@@ -23,14 +24,21 @@ const styles = {
 const itemsPerPage = 32
 
 export default function Page() {
-  const { membersOfParliament, isLoading, handleGetMembersOfParliament } =
-    useMembersOfParliament()
-  const { handleGetClubs, clubs } = useClubs()
+  const { parliamentarians, isLoading, handleGetParliamentarians } =
+    useParliamentarians()
+  const { handleGetParliamentaryGroups, parliamentaryGroups } =
+    useParliamentaryGroups()
   const { changeTitle } = useTopAppBar()
 
-  const [currentData, setCurrentData] = useState<TMemberOfParliament[]>([])
-  const [filterData, setFilterData] = useState<TMemberOfParliament[]>([])
+  const [currentData, setCurrentData] = useState<TParliamentarian[]>([])
+  const [filterData, setFilterData] = useState<TParliamentarian[]>([])
   const [selectClub, setSelectClub] = useState("All")
+
+  const [searchValue, setSearchValue] = useState("")
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value)
+  }
 
   const handleSelect = (event: SelectChangeEvent) => {
     setSelectClub(event.target.value as string)
@@ -38,22 +46,22 @@ export default function Page() {
 
   const filteredData = useMemo(() => {
     return selectClub === "All"
-      ? membersOfParliament || []
-      : membersOfParliament?.filter((item) => item.club === selectClub) || []
-  }, [membersOfParliament, selectClub])
+      ? parliamentarians || []
+      : parliamentarians?.filter((item) => item.club === selectClub) || []
+  }, [parliamentarians, selectClub])
 
   useEffect(() => {
-    handleGetMembersOfParliament()
-    handleGetClubs()
+    handleGetParliamentarians()
+    handleGetParliamentaryGroups()
     changeTitle("Posłowie")
-  }, [handleGetMembersOfParliament, handleGetClubs, changeTitle])
+  }, [handleGetParliamentarians, handleGetParliamentaryGroups, changeTitle])
 
   useEffect(() => {
     setFilterData(filteredData)
     setCurrentData(filteredData.slice(0, itemsPerPage))
-  }, [selectClub, membersOfParliament, filteredData])
+  }, [selectClub, parliamentarians, filteredData])
 
-  if (isLoading || !clubs) return <Loader />
+  if (isLoading || !parliamentaryGroups) return <Loader />
 
   return (
     <Container>
@@ -61,7 +69,11 @@ export default function Page() {
         <ClubSelect
           handleSelect={handleSelect}
           selectClub={selectClub}
-          data={clubs}
+          data={parliamentaryGroups}
+        />
+        <SearchInput
+          searchValue={searchValue}
+          handleSearch={handleSearch}
         />
       </Box>
 
@@ -75,7 +87,7 @@ export default function Page() {
             key={item.id}
             size={{ xs: 4, sm: 4, md: 3, lg: 2 }}
           >
-            <MemberOfParliamentCard
+            <ParliamentarianCard
               selectedClub={selectClub}
               item={item}
             />

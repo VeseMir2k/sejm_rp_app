@@ -1,4 +1,4 @@
-export type TClub = {
+export type TParliamentaryGroup = {
   email: string
   fax: string
   id: string

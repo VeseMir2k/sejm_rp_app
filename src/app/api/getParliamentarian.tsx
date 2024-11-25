@@ -1,5 +1,5 @@
-export const getMembersOfParliament = async () => {
-  const url = `https://api.sejm.gov.pl/sejm/term10/MP`
+export const getParliamentarian = async (id: string) => {
+  const url = `https://api.sejm.gov.pl/sejm/term10/MP/${id}`
 
   const response = await fetch(url)
 

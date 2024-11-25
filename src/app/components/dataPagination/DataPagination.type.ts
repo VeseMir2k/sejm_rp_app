@@ -1,4 +1,4 @@
-import { MemberOfParliament } from "../../types/MemberOfParliament.type"
+import { MemberOfParliament } from "../../types/Parliamentarians.type"
 
 export type DataPaginationProps = {
   data: MemberOfParliament[]

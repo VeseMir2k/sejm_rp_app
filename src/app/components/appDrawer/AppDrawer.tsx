@@ -35,8 +35,8 @@ export default function AppDrawer({
 
   const menu = [
     { name: "Strona główna", href: "/" },
-    { name: "Kluby i koła", href: "/clubs-and-groups" },
-    { name: "Posłowie", href: "/members-of-parliament" },
+    { name: "Kluby i koła", href: "/parliamentary-groups" },
+    { name: "Posłowie", href: "/parliamentarians" },
     { name: "Komisje", href: "/committees" },
     { name: "Obrady", href: "/proceedings" },
   ]

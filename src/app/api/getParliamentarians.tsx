@@ -1,5 +1,5 @@
-export const getClubs = async () => {
-  const url = `https://api.sejm.gov.pl/sejm/term10/clubs`
+export const getParliamentarians = async () => {
+  const url = `https://api.sejm.gov.pl/sejm/term10/MP`
 
   const response = await fetch(url)
 

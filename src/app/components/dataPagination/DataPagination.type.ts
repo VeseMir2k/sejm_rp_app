@@ -1,7 +1,7 @@
-import { MemberOfParliament } from "../../types/Parliamentarians.type"
+import { TParliamentarian } from "../../types/Parliamentarian.type"
 
 export type DataPaginationProps = {
-  data: MemberOfParliament[]
+  data: TParliamentarian[]
   itemsPerPage: number
-  setCurrentData: (data: MemberOfParliament[]) => void
+  setCurrentData: (data: TParliamentarian[]) => void
 }

@@ -6,7 +6,7 @@ export type TParliamentariansProps = {
 
 export type TParliamentariansContext = {
   parliamentarians: TParliamentarian[] | null
-  isLoading: boolean
-  error: string | null
+  isLoadingParliamentarians: boolean
+  errorParliamentarians: string | null
   handleGetParliamentarians: () => void
 }

@@ -6,6 +6,6 @@ export type TTranscriptsProps = {
 
 export type TTranscriptsContext = {
   transcripts: TTranscripts | null
-  isLoading: boolean
+  isLoadingTranscripts: boolean
   handleGetTranscripts: (proceeding: string, date: string) => void
 }

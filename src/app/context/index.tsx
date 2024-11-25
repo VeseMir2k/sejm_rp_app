@@ -2,7 +2,7 @@ import { ParliamentariansProvider } from "./Parliamentarians"
 import { TopAppBarProvider } from "./TopAppBar"
 import { ProceedingsProvider } from "./Proceedings"
 import { TranscriptsProvider } from "./Transcripts"
-import { ParliamentaryGroupsProvider } from "./ParliamentaryGroupsContext"
+import { ParliamentaryGroupsProvider } from "./ParliamentaryGroups"
 
 type AppProviderProps = {
   children: React.ReactNode

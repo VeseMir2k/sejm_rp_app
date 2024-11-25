@@ -6,6 +6,6 @@ export type TProceedingsProps = {
 
 export type TProceedingsContext = {
   proceedings: TProceeding[] | null
-  isLoading: boolean
+  isLoadingProceedings: boolean
   handleGetProceedings: () => void
 }

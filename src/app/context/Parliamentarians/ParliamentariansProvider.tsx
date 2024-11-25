@@ -10,20 +10,23 @@ export const ParliamentariansProvider = ({
   const [parliamentarians, setParliamentarians] = useState<
     TParliamentarian[] | null
   >(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
+  const [isLoadingParliamentarians, setIsLoadingParliamentarians] =
+    useState<boolean>(true)
+  const [errorParliamentarians, setErrorParliamentarians] = useState<
+    string | null
+  >(null)
 
   const handleGetParliamentarians = useCallback(async () => {
-    setIsLoading(true)
-    setError(null)
+    setIsLoadingParliamentarians(true)
+    setErrorParliamentarians(null)
     try {
       const data = await getParliamentarians()
       setParliamentarians(data)
     } catch (err) {
       console.error("Error fetching MPs data:", err)
-      setError("Nie udało się załadować danych posłów.")
+      setErrorParliamentarians("Nie udało się załadować danych posłów.")
     } finally {
-      setIsLoading(false)
+      setIsLoadingParliamentarians(false)
     }
   }, [])
 
@@ -31,8 +34,8 @@ export const ParliamentariansProvider = ({
     <ParliamentariansContext.Provider
       value={{
         parliamentarians,
-        isLoading,
-        error,
+        isLoadingParliamentarians,
+        errorParliamentarians,
         handleGetParliamentarians,
       }}
     >

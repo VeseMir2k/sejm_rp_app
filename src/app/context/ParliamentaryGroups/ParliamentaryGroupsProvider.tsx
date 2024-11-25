@@ -10,23 +10,28 @@ export const ParliamentaryGroupsProvider = ({
   const [parliamentaryGroups, setParliamentaryGroups] = useState<
     TParliamentaryGroup[]
   >([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoadingParliamentaryGroups, setIsLoadingParliamentaryGroups] =
+    useState<boolean>(true)
 
   const handleGetParliamentaryGroups = useCallback(async () => {
-    setIsLoading(true)
+    setIsLoadingParliamentaryGroups(true)
     try {
       const data = await getParliamentaryGroups()
       setParliamentaryGroups(data)
     } catch (error) {
       console.log(error)
     } finally {
-      setIsLoading(false)
+      setIsLoadingParliamentaryGroups(false)
     }
   }, [])
 
   return (
     <ParliamentaryGroupsContext.Provider
-      value={{ parliamentaryGroups, isLoading, handleGetParliamentaryGroups }}
+      value={{
+        parliamentaryGroups,
+        isLoadingParliamentaryGroups,
+        handleGetParliamentaryGroups,
+      }}
     >
       {children}
     </ParliamentaryGroupsContext.Provider>

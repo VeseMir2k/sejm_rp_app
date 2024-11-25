@@ -6,6 +6,6 @@ export type TParliamentaryGroupsProviderProps = {
 
 export type TParliamentaryGroupsContext = {
   parliamentaryGroups: TParliamentaryGroup[] | null
-  isLoading: boolean
+  isLoadingParliamentaryGroups: boolean
   handleGetParliamentaryGroups: () => void
 }

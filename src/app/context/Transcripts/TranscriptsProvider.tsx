@@ -6,12 +6,13 @@ import { TranscriptsContext } from "./TranscriptsContext"
 export const TranscriptsProvider = ({ children }: TTranscriptsProps) => {
   const [transcripts, setTranscripts] = useState<TTranscripts | null>(null)
 
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoadingTranscripts, setIsLoadingTranscripts] =
+    useState<boolean>(true)
 
   const handleGetTranscripts = useCallback(
     async (proceeding: string, date: string) => {
       setTranscripts(null)
-      setIsLoading(true)
+      setIsLoadingTranscripts(true)
       try {
         const response = await fetch(
           `https://api.sejm.gov.pl/sejm/term10/proceedings/${proceeding}/${date}/transcripts`
@@ -24,7 +25,7 @@ export const TranscriptsProvider = ({ children }: TTranscriptsProps) => {
       } catch (error) {
         console.log(error)
       } finally {
-        setIsLoading(false)
+        setIsLoadingTranscripts(false)
       }
     },
     []
@@ -34,7 +35,7 @@ export const TranscriptsProvider = ({ children }: TTranscriptsProps) => {
     <TranscriptsContext.Provider
       value={{
         transcripts,
-        isLoading,
+        isLoadingTranscripts,
         handleGetTranscripts,
       }}
     >

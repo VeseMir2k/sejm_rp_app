@@ -8,9 +8,10 @@ import { TParliamentarian } from "../../types/Parliamentarian.type"
 import Loader from "@/app/components/Loader"
 
 export default function Page() {
-  const [memberOfParliament, setMemberOfParliament] =
+  const [parliamentarian, setParliamentarian] =
     useState<TParliamentarian | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoadingParliamentarian, setIsLoadingParliamentarian] =
+    useState<boolean>(true)
 
   const { changeTitle } = useTopAppBar()
 
@@ -19,30 +20,30 @@ export default function Page() {
   const nameParams = searchParams.get("name")
   const idParams = searchParams.get("id")
 
-  const handleGetMemberOfParliament = useCallback(async (id: string) => {
-    setIsLoading(true)
+  const handleGetParliamentarian = useCallback(async (id: string) => {
+    setIsLoadingParliamentarian(true)
     try {
       const data = await getParliamentarian(id)
-      setMemberOfParliament(data)
+      setParliamentarian(data)
     } catch (error) {
       console.error(`Błąd pobierania danych: ${error}`)
     } finally {
-      setIsLoading(false)
+      setIsLoadingParliamentarian(false)
     }
   }, [])
 
   useEffect(() => {
     changeTitle(nameParams as string)
-    handleGetMemberOfParliament(idParams as string)
-  }, [changeTitle, handleGetMemberOfParliament, idParams, nameParams])
+    handleGetParliamentarian(idParams as string)
+  }, [changeTitle, handleGetParliamentarian, idParams, nameParams])
 
-  if (isLoading) return <Loader />
+  if (isLoadingParliamentarian) return <Loader />
 
-  if (!memberOfParliament) {
+  if (!parliamentarian) {
     return <div>Brak danych posła.</div>
   }
 
-  const { firstLastName } = memberOfParliament
+  const { firstLastName } = parliamentarian
 
   return (
     <>

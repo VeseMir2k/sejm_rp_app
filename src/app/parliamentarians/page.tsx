@@ -24,21 +24,12 @@ const styles = {
 const PARLIAMENTARIANS_PER_PAGE = 32
 
 export default function ParliamentariansPage() {
-  const {
-    parliamentarians,
-    isLoadingParliamentarians,
-    handleGetParliamentarians,
-  } = useParliamentarians()
-  const { handleGetParliamentaryGroups, parliamentaryGroups } =
-    useParliamentaryGroups()
+  const { parliamentarians, isLoadingParliamentarians, handleGetParliamentarians } = useParliamentarians()
+  const { handleGetParliamentaryGroups, parliamentaryGroups } = useParliamentaryGroups()
   const { changeTitle } = useTopAppBar()
 
-  const [currentParliamentarians, setCurrentParliamentarians] = useState<
-    TParliamentarian[]
-  >([])
-  const [filteredParliamentarians, setFilteredParliamentarians] = useState<
-    TParliamentarian[]
-  >([])
+  const [currentParliamentarians, setCurrentParliamentarians] = useState<TParliamentarian[]>([])
+  const [filteredParliamentarians, setFilteredParliamentarians] = useState<TParliamentarian[]>([])
   const [selectClub, setSelectClub] = useState("All")
   const [searchValue, setSearchValue] = useState("")
 
@@ -64,23 +55,16 @@ export default function ParliamentariansPage() {
 
   useEffect(() => {
     setFilteredParliamentarians(parliamentariansByGroup)
-    setCurrentParliamentarians(
-      parliamentariansByGroup.slice(0, PARLIAMENTARIANS_PER_PAGE)
-    )
+    setCurrentParliamentarians(parliamentariansByGroup.slice(0, PARLIAMENTARIANS_PER_PAGE))
   }, [selectClub, parliamentariansByGroup])
 
   useEffect(() => {
     const searchResults = parliamentariansByGroup.filter((deputy) =>
-      deputy.firstLastName
-        .toLowerCase()
-        .trim()
-        .includes(searchValue.toLowerCase().trim())
+      deputy.firstLastName.toLowerCase().trim().includes(searchValue.toLowerCase().trim())
     )
 
     setFilteredParliamentarians(searchResults)
-    setCurrentParliamentarians(
-      searchResults.slice(0, PARLIAMENTARIANS_PER_PAGE)
-    )
+    setCurrentParliamentarians(searchResults.slice(0, PARLIAMENTARIANS_PER_PAGE))
   }, [searchValue, parliamentariansByGroup])
 
   if (isLoadingParliamentarians || !parliamentaryGroups) return <Loader />
@@ -88,11 +72,7 @@ export default function ParliamentariansPage() {
   return (
     <Container>
       <Box sx={styles.formWrapper}>
-        <ClubSelect
-          handleSelect={handleSelect}
-          selectClub={selectClub}
-          data={parliamentaryGroups}
-        />
+        <ClubSelect handleSelect={handleSelect} selectClub={selectClub} data={parliamentaryGroups} />
         <SearchInput searchValue={searchValue} handleSearch={handleSearch} />
       </Box>
 

@@ -69,6 +69,20 @@ export default function ParliamentariansPage() {
     )
   }, [selectClub, parliamentariansByGroup])
 
+  useEffect(() => {
+    const searchResults = parliamentariansByGroup.filter((deputy) =>
+      deputy.firstLastName
+        .toLowerCase()
+        .trim()
+        .includes(searchValue.toLowerCase().trim())
+    )
+
+    setFilteredParliamentarians(searchResults)
+    setCurrentParliamentarians(
+      searchResults.slice(0, PARLIAMENTARIANS_PER_PAGE)
+    )
+  }, [searchValue, parliamentariansByGroup])
+
   if (isLoadingParliamentarians || !parliamentaryGroups) return <Loader />
 
   return (

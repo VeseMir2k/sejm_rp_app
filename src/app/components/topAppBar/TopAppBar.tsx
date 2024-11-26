@@ -3,12 +3,7 @@ import { TopAppBarProps } from "./TopAppBar.type"
 import { AppBar, IconButton, Typography, Toolbar } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 
-export default function TopAppBar({
-  isClosing,
-  setMobileOpen,
-  mobileOpen,
-  drawerWidth,
-}: TopAppBarProps) {
+export default function TopAppBar({ isClosing, setMobileOpen, mobileOpen, drawerWidth }: TopAppBarProps) {
   const { title } = useTopAppBar()
 
   const handleDrawerToggle = () => {
@@ -35,11 +30,7 @@ export default function TopAppBar({
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          variant="h6"
-          noWrap
-          component="div"
-        >
+        <Typography variant="h6" noWrap component="div">
           {title}
         </Typography>
       </Toolbar>

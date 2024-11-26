@@ -93,26 +93,13 @@ export default function ParliamentariansPage() {
           selectClub={selectClub}
           data={parliamentaryGroups}
         />
-        <SearchInput
-          searchValue={searchValue}
-          handleSearch={handleSearch}
-        />
+        <SearchInput searchValue={searchValue} handleSearch={handleSearch} />
       </Box>
 
-      <Grid2
-        container
-        spacing={4}
-        columns={{ xs: 12, sm: 12, md: 18, lg: 18 }}
-      >
+      <Grid2 container spacing={4} columns={{ xs: 12, sm: 12, md: 18, lg: 18 }}>
         {currentParliamentarians.map((item) => (
-          <Grid2
-            key={item.id}
-            size={{ xs: 4, sm: 4, md: 3, lg: 2 }}
-          >
-            <ParliamentarianCard
-              selectedClub={selectClub}
-              item={item}
-            />
+          <Grid2 key={item.id} size={{ xs: 4, sm: 4, md: 3, lg: 2 }}>
+            <ParliamentarianCard selectedClub={selectClub} item={item} />
           </Grid2>
         ))}
       </Grid2>

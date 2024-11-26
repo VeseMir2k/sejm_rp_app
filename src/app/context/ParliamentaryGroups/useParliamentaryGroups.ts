@@ -5,9 +5,7 @@ import { TParliamentaryGroupsContext } from "./ParliamentaryGroupsContext.type"
 export function useParliamentaryGroups(): TParliamentaryGroupsContext {
   const context = useContext(ParliamentaryGroupsContext)
   if (!context) {
-    throw new Error(
-      "useParliamentaryGroups must be used within a ParliamentaryGroupsProvider"
-    )
+    throw new Error("useParliamentaryGroups must be used within a ParliamentaryGroupsProvider")
   }
   return context
 }

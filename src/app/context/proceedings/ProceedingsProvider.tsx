@@ -22,9 +22,7 @@ export const ProceedingsProvider = ({ children }: TProceedingsProps) => {
   }, [])
 
   return (
-    <ProceedingsContext.Provider
-      value={{ proceedings, isLoadingProceedings, handleGetProceedings }}
-    >
+    <ProceedingsContext.Provider value={{ proceedings, isLoadingProceedings, handleGetProceedings }}>
       {children}
     </ProceedingsContext.Provider>
   )

@@ -54,18 +54,12 @@ const styles = {
   },
 } as const
 
-export default function ParliamentarianCard({
-  item,
-  selectedClub,
-}: ParliamentarianCardProps) {
+export default function ParliamentarianCard({ item, selectedClub }: ParliamentarianCardProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
   return (
-    <Link
-      href={`/parliamentarians/parliamentarian?name=${item.firstLastName}&id=${item.id}`}
-      style={styles.link}
-    >
+    <Link href={`/parliamentarians/parliamentarian?name=${item.firstLastName}&id=${item.id}`} style={styles.link}>
       <Box sx={styles.card}>
         <Box sx={styles.imageWrapper}>
           {isLoading && !hasError && (
@@ -96,11 +90,7 @@ export default function ParliamentarianCard({
             unoptimized={true}
           />
         </Box>
-        <Typography
-          variant="caption"
-          textAlign="center"
-          sx={styles.text}
-        >
+        <Typography variant="caption" textAlign="center" sx={styles.text}>
           <span>{item.firstLastName}</span>
           <span>{selectedClub === "All" && `(${item.club})`}</span>
         </Typography>

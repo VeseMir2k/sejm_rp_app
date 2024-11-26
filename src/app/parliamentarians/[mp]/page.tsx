@@ -8,10 +8,8 @@ import { TParliamentarian } from "../../types/Parliamentarian.type"
 import Loader from "@/app/components/Loader"
 
 export default function ParliamentarianPage() {
-  const [parliamentarian, setParliamentarian] =
-    useState<TParliamentarian | null>(null)
-  const [isLoadingParliamentarian, setIsLoadingParliamentarian] =
-    useState<boolean>(true)
+  const [parliamentarian, setParliamentarian] = useState<TParliamentarian | null>(null)
+  const [isLoadingParliamentarian, setIsLoadingParliamentarian] = useState<boolean>(true)
 
   const { changeTitle } = useTopAppBar()
 

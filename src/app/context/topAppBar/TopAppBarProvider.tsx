@@ -9,9 +9,5 @@ export const TopAppBarProvider = ({ children }: TTopAppBarProps) => {
     setTitle(title)
   }
 
-  return (
-    <TopAppBarContext.Provider value={{ title, changeTitle }}>
-      {children}
-    </TopAppBarContext.Provider>
-  )
+  return <TopAppBarContext.Provider value={{ title, changeTitle }}>{children}</TopAppBarContext.Provider>
 }

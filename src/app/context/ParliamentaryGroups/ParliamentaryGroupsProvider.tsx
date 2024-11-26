@@ -4,14 +4,9 @@ import { TParliamentaryGroup } from "@/app/types/ParliamentaryGroup.type"
 import { TParliamentaryGroupsProviderProps } from "./ParliamentaryGroupsContext.type"
 import { ParliamentaryGroupsContext } from "./ParliamentaryGroupsContext"
 
-export const ParliamentaryGroupsProvider = ({
-  children,
-}: TParliamentaryGroupsProviderProps) => {
-  const [parliamentaryGroups, setParliamentaryGroups] = useState<
-    TParliamentaryGroup[]
-  >([])
-  const [isLoadingParliamentaryGroups, setIsLoadingParliamentaryGroups] =
-    useState<boolean>(true)
+export const ParliamentaryGroupsProvider = ({ children }: TParliamentaryGroupsProviderProps) => {
+  const [parliamentaryGroups, setParliamentaryGroups] = useState<TParliamentaryGroup[]>([])
+  const [isLoadingParliamentaryGroups, setIsLoadingParliamentaryGroups] = useState<boolean>(true)
 
   const handleGetParliamentaryGroups = useCallback(async () => {
     setIsLoadingParliamentaryGroups(true)

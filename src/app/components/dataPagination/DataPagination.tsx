@@ -13,11 +13,7 @@ const styles = {
   },
 }
 
-export default function DataPagination({
-  data,
-  itemsPerPage,
-  setCurrentData,
-}: DataPaginationProps) {
+export default function DataPagination({ data, itemsPerPage, setCurrentData }: DataPaginationProps) {
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(data.length / itemsPerPage)
 
@@ -28,30 +24,17 @@ export default function DataPagination({
     setCurrentData(data.slice(startIdx, endIdx))
   }, [setCurrentData, currentPage, data, startIdx, endIdx])
 
-  const handlePageChange = (
-    _event: React.ChangeEvent<unknown>,
-    page: number
-  ) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page)
   }
 
   return (
-    <Stack
-      mt={2}
-      direction="row"
-      spacing={2}
-      sx={styles.pagination}
-    >
+    <Stack mt={2} direction="row" spacing={2} sx={styles.pagination}>
       <Pagination
         count={totalPages}
         page={currentPage}
         onChange={handlePageChange}
-        renderItem={(item) => (
-          <PaginationItem
-            slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-            {...item}
-          />
-        )}
+        renderItem={(item) => <PaginationItem slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }} {...item} />}
       />
     </Stack>
   )

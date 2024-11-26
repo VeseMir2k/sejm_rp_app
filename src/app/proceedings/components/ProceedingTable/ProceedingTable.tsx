@@ -1,15 +1,7 @@
 "use client"
 
 import { useTranscripts } from "@/app/context/Transcripts"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material"
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material"
 
 export default function ProceedingTable() {
   const { transcripts } = useTranscripts()
@@ -29,10 +21,7 @@ export default function ProceedingTable() {
 
   return (
     <TableContainer component={Paper}>
-      <Table
-        sx={{ minWidth: 650 }}
-        aria-label="simple table"
-      >
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
@@ -43,14 +32,8 @@ export default function ProceedingTable() {
         </TableHead>
         <TableBody>
           {transcripts?.statements.map((statement) => (
-            <TableRow
-              key={statement.num}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell
-                component="th"
-                scope="row"
-              >
+            <TableRow key={statement.num} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+              <TableCell component="th" scope="row">
                 {statement.name}
               </TableCell>
               <TableCell>{statement.function}</TableCell>

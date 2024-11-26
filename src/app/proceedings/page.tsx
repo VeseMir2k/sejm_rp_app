@@ -9,8 +9,7 @@ import Loader from "../components/Loader/Loader"
 
 export default function ProceedingsPage() {
   const { changeTitle } = useTopAppBar()
-  const { handleGetProceedings, proceedings, isLoadingProceedings } =
-    useProceedings()
+  const { handleGetProceedings, proceedings, isLoadingProceedings } = useProceedings()
 
   useEffect(() => {
     handleGetProceedings()
@@ -22,30 +21,13 @@ export default function ProceedingsPage() {
   return (
     <>
       {proceedings?.map((proceeding) => (
-        <Box
-          key={proceeding.title}
-          component="section"
-        >
-          <Typography
-            variant="body1"
-            sx={{ py: 2 }}
-          >
+        <Box key={proceeding.title} component="section">
+          <Typography variant="body1" sx={{ py: 2 }}>
             {proceeding.title}
           </Typography>
-          <Stack
-            spacing={{ xs: 1, sm: 2 }}
-            direction="row"
-            useFlexGap
-            sx={{ flexWrap: "wrap" }}
-          >
+          <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap sx={{ flexWrap: "wrap" }}>
             {proceeding.dates.map((item: string, index: number) => {
-              return (
-                <ProceedingLink
-                  key={`link_${index}`}
-                  date={item}
-                  proceedingNumber={proceeding.number}
-                />
-              )
+              return <ProceedingLink key={`link_${index}`} date={item} proceedingNumber={proceeding.number} />
             })}
           </Stack>
         </Box>

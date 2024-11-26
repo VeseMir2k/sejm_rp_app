@@ -3,22 +3,9 @@
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { AppDrawerProps } from "./AppDrawer.type"
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-} from "@mui/material"
+import { Drawer, List, ListItem, ListItemButton, ListItemText, Toolbar } from "@mui/material"
 
-export default function AppDrawer({
-  window,
-  setIsClosing,
-  setMobileOpen,
-  mobileOpen,
-  drawerWidth,
-}: AppDrawerProps) {
+export default function AppDrawer({ window, setIsClosing, setMobileOpen, mobileOpen, drawerWidth }: AppDrawerProps) {
   const pathname = usePathname()
 
   const handleDrawerClose = () => {
@@ -30,8 +17,7 @@ export default function AppDrawer({
     setIsClosing(false)
   }
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined
+  const container = window !== undefined ? () => window().document.body : undefined
 
   const menu = [
     { name: "Strona główna", href: "/" },
@@ -46,23 +32,13 @@ export default function AppDrawer({
       <Toolbar />
       <List>
         {menu.map((item) => {
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(item.href)
+          const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
           return (
-            <Link
-              style={{ color: "white", textDecoration: "none" }}
-              key={item.name}
-              href={item.href}
-              passHref
-            >
+            <Link style={{ color: "white", textDecoration: "none" }} key={item.name} href={item.href} passHref>
               <ListItem disablePadding>
                 <ListItemButton
                   sx={{
-                    backgroundColor: isActive
-                      ? "rgba(255, 255, 255, 0.2)"
-                      : "inherit",
+                    backgroundColor: isActive ? "rgba(255, 255, 255, 0.2)" : "inherit",
                     "&:hover": {
                       backgroundColor: "rgba(255, 255, 255, 0.1)",
                     },
